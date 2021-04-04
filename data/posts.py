@@ -11,9 +11,9 @@ class Post(SqlAlchemyBase, SerializerMixin):
                            primary_key=True, autoincrement=True)
     creator_id = sqlalchemy.Column(sqlalchemy.Integer,
                                    sqlalchemy.ForeignKey("users.id"), nullable=False)
-    film_id = sqlalchemy.Column(sqlalchemy.Integer,
-                                sqlalchemy.ForeignKey("films.id"), nullable=False)
+    # film_id = sqlalchemy.Column(sqlalchemy.Integer,
+    #                             sqlalchemy.ForeignKey("films.id"), nullable=False)
     text = sqlalchemy.Column(sqlalchemy.String, nullable=False)
 
     user = orm.relation('User')
-    film = orm.relation('Film')
+    # film = orm.relation('Film')
