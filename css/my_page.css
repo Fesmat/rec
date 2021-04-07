@@ -1,0 +1,140 @@
+body {
+    margin: 0;
+    font-family: Tahoma;
+    min-width: 500px;
+    box-sizing: border-box;
+}
+
+.header {
+    position: fixed;
+    width: 100%;
+    height: 75px;
+    background-color: #1a1a1a;
+    box-shadow: 0 0 10px 5px rgba(221, 221, 221, 1);
+    color: #ceff1d;
+    padding-left: 10px;
+    font-family: Tahoma;
+    font-size: 25px;
+    font-weight: bold;
+    display: table;
+    vertical-align: middle;
+}
+
+.main {
+    width: 100%;
+}
+
+.menu {
+    width: 15%;
+    height: 100vh;
+    background: #f1f1f1;
+    float: left;
+    text-align: center;
+}
+
+.info {
+    margin-top: 80px;
+    width: 84%;
+    float: right;
+}
+
+.photo {
+    color: white;
+    width: 40%;
+    height: 300px;
+}
+
+.edit_photo {
+    margin-top: 30px;
+    width: 100%;
+    height: 100px;
+    text-align: center;
+}
+
+.btn_edit {
+    display: inline-block;
+    background: #1a1a1a;
+    color: #fff;
+    padding: 12px;
+    border: none;
+    border-radius: 3px;
+    text-decoration: none;
+    font-family: Tahoma;
+    font-size: 18px;
+    line-height: 1;
+    font-weight: 100;
+    cursor: pointer;
+}
+
+.user-info {
+    width: 100%;
+    height: 320px;
+}
+
+.films-info {
+    width: 100%;
+    height: 45vh;
+}
+
+.photo {
+    float: left;
+    width: 250px;
+    height: 300px;
+    min-width: 230px;
+}
+
+.inf {
+    float: left;
+    height: 300px;
+    width: 60%;
+}
+
+.photo-card {
+    margin-top: 10px;
+    margin-left: 25px;
+    width: 200px;
+    height: 200px;
+}
+
+.gen-info {
+    width: 100%;
+    height: 200px;
+}
+
+.film-info {
+    width: 100%;
+    height: 65px;
+    margin: auto;
+}
+
+.film-info-table {
+    width: 400px;
+    height: 35px;
+    text-align: center;
+    line-height: 0.5;
+    margin: auto;
+}
+
+.friends {
+    width: 200px;
+    height: 400px;
+    background-color: black;
+    margin-left: 22px;
+    color: white;
+    float: left;
+}
+
+.feed {
+    text-align: center;
+    height: 500px;
+    width: calc(100% - 230px);
+    float: right;
+    background-color: green;
+}
+
+.post {
+    margin-left: 70px;
+    width: 600px;
+    height: 400px;
+    background-color: black;
+}
