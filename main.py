@@ -58,6 +58,16 @@ def register_user():
     return render_template('register.html', title='Registration', form=form)
 
 
+@app.route('/profile')
+def profile():
+    return render_template('my_page.html')
+
+
+@app.route('/search_films')
+def search_films():
+    return render_template('search_films.html')
+
+
 if __name__ == '__main__':
     db_session.global_init("db/global.db")
     app.run(port=5000, host='127.0.0.1')
