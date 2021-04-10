@@ -12,10 +12,12 @@ class User(SqlAlchemyBase, UserMixin, SerializerMixin):
                            primary_key=True, autoincrement=True)
     login = sqlalchemy.Column(sqlalchemy.Integer,
                               nullable=False)
-    hashed_pwd = sqlalchemy.Column(sqlalchemy.String, nullable=False)
+    pwd = sqlalchemy.Column(sqlalchemy.String, nullable=False)
     name = sqlalchemy.Column(sqlalchemy.String, nullable=False)
     surname = sqlalchemy.Column(sqlalchemy.String, nullable=False)
     age = sqlalchemy.Column(sqlalchemy.Integer, nullable=False)
+    liked_films = sqlalchemy.Column(sqlalchemy.Integer, nullable=False)
+    liked_posts = sqlalchemy.Column(sqlalchemy.Integer, nullable=False)
 
     def set_password(self, password):
         self.hashed_password = generate_password_hash(password)
