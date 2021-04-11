@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html>
 <h1>Регистрация</h1>
 <form action="" method="post">
     {{ form.hidden_tag() }}
@@ -11,18 +13,18 @@
         {% endfor %}
     </div>
     <div>
-        {{ form.password.label }}<br>
-        {{ form.password(class="form-control", type="password") }}<br>
-        {% for error in form.password.errors %}
+        {{ form.pwd.label }}<br>
+        {{ form.pwd(class="form-control", type="password") }}<br>
+        {% for error in form.pwd.errors %}
         <p class="alert alert-danger" role="alert">
             {{ error }}
         </p>
         {% endfor %}
     </div>
     <div>
-        {{ form.password_again.label }}<br>
-        {{ form.password_again(class="form-control", type="password") }}<br>
-        {% for error in form.password_again.errors %}
+        {{ form.pwd_sec.label }}<br>
+        {{ form.pwd_sec(class="form-control", type="password") }}<br>
+        {% for error in form.pwd_sec.errors %}
         <p class="alert alert-danger" role="alert">
             {{ error }}
         </p>
@@ -58,3 +60,4 @@
     <p>{{ form.submit(type="submit", class="btn btn-primary") }}</p>
     {{message}}
 </form>
+</html>

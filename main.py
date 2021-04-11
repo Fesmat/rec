@@ -1,13 +1,15 @@
 from flask import Flask, render_template
-from flask_login import login_user
+from flask_login import login_user, LoginManager
 from werkzeug.utils import redirect
-
 from data import db_session
 from data.users import User
+from forms.login_user import LoginForm
 from forms.register_user import RegisterForm
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '1Aj3sL12J09d43Ksp02A'
+login_manager = LoginManager()
+login_manager.init_app(app)
 
 
 @app.route('/', methods=['GET'])
@@ -16,35 +18,38 @@ def index():
     return 'That\'s CumImdb'
 
 
-@app.route('/login', methods=['POST'])
+@app.route('/login', methods=['POST', 'GET'])
 def login():
     form = LoginForm()
     if form.validate_on_submit():
         db_sess = db_session.create_session()
         user = db_sess.query(User).filter(User.login == form.login.data).first()
-        if user and user.check_password(form.password.data):
+        if user and user.check_password(form.pwd.data):
             db_sess.close()
             login_user(user, remember=form.remember_me.data)
             return redirect("/")
         db_sess.close()
         return render_template('login.html',
-                               message="Wrong login or password",
+                               message="Неверный логин или пароль",
                                form=form)
     return render_template('login.html', title='Authorization', form=form)
 
 
-@app.route('/register', methods=['POST'])
+@app.route('/register', methods=['POST', 'GET'])
 def register_user():
     form = RegisterForm()
     if form.validate_on_submit():
         db_sess = db_session.create_session()
         user = User()
-        us = db_sess.query(User).filter(User.email == form.email.data).all()
+        us = db_sess.query(User).filter(User.login == form.login.data).all()
         if us:
             render_template('register.html', title='User registration', form=form,
                             message="Пользователь с таким логином уже существует")
         else:
-            user.login = form.loginl.data
+            user.login = form.login.data
+            if form.pwd.data != form.pwd_sec.data:
+                form.pwd_sec.errors = ['Пароли не совпадают']
+                return render_template('register.html', title='Registration', form=form)
             user.set_password(form.pwd.data)
             user.surname = form.surname.data
             user.name = form.name.data
@@ -66,6 +71,12 @@ def profile():
 @app.route('/search_films')
 def search_films():
     return render_template('search_films.html')
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    db_sess = db_session.create_session()
+    return db_sess.query(User).get(user_id)
 
 
 if __name__ == '__main__':
