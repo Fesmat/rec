@@ -16,6 +16,7 @@ class User(SqlAlchemyBase, UserMixin, SerializerMixin):
     name = sqlalchemy.Column(sqlalchemy.String, nullable=False)
     surname = sqlalchemy.Column(sqlalchemy.String, nullable=False)
     age = sqlalchemy.Column(sqlalchemy.Integer, nullable=False)
+    description = sqlalchemy.Column(sqlalchemy.Text, nullable=False)
     liked_films = sqlalchemy.Column(sqlalchemy.Integer, nullable=False)
     liked_posts = sqlalchemy.Column(sqlalchemy.Integer, nullable=False)
 

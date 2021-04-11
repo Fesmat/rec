@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-from flask_login import login_user, LoginManager
+from flask_login import login_user, LoginManager, current_user, login_required, logout_user
 from werkzeug.utils import redirect
 from data import db_session
 from data.users import User
@@ -15,7 +15,10 @@ login_manager.init_app(app)
 @app.route('/', methods=['GET'])
 @app.route('/index', methods=['GET'])
 def index():
-    return 'That\'s CumImdb'
+    print(current_user)
+    if current_user.is_authenticated():
+        return 'That\'s CumImdb'
+    return redirect('/login')
 
 
 @app.route('/login', methods=['POST', 'GET'])
@@ -71,6 +74,13 @@ def profile():
 @app.route('/search_films')
 def search_films():
     return render_template('search_films.html')
+
+
+@app.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    return redirect('/login')
 
 
 @login_manager.user_loader
