@@ -15,7 +15,6 @@ login_manager.init_app(app)
 @app.route('/', methods=['GET'])
 @app.route('/index', methods=['GET'])
 def index():
-    print(current_user)
     if current_user.is_authenticated:
         return 'That\'s CumImdb'
     return redirect('/login')
@@ -23,6 +22,9 @@ def index():
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
+    print('login')
+    if current_user.is_authenticated:
+        return redirect('/')
     form = LoginForm()
     if form.validate_on_submit():
         db_sess = db_session.create_session()
@@ -32,6 +34,7 @@ def login():
             login_user(user, remember=form.remember_me.data)
             return redirect("/")
         db_sess.close()
+        print('+++')
         return render_template('login.html',
                                message="Неверный логин или пароль",
                                form=form)
@@ -40,6 +43,9 @@ def login():
 
 @app.route('/register', methods=['POST', 'GET'])
 def register_user():
+    print('register')
+    if current_user.is_authenticated:
+        return redirect('/')
     form = RegisterForm()
     if form.validate_on_submit():
         db_sess = db_session.create_session()
@@ -58,8 +64,6 @@ def register_user():
             user.name = form.name.data
             user.age = form.age.data
             user.description = form.description.data
-            user.liked_films = 0
-            user.liked_posts = 0
             db_sess.add(user)
             db_sess.commit()
             login_user(user)
@@ -69,6 +73,8 @@ def register_user():
 
 @app.route('/profile')
 def profile():
+    if not current_user.is_authenticated:
+        return redirect('/login')
     return render_template('my_page.html')
 
 

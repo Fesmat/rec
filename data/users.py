@@ -17,8 +17,9 @@ class User(SqlAlchemyBase, UserMixin, SerializerMixin):
     surname = sqlalchemy.Column(sqlalchemy.String, nullable=False)
     age = sqlalchemy.Column(sqlalchemy.Integer, nullable=False)
     description = sqlalchemy.Column(sqlalchemy.Text, nullable=False)
-    liked_films = sqlalchemy.Column(sqlalchemy.Integer, nullable=False)
-    liked_posts = sqlalchemy.Column(sqlalchemy.Integer, nullable=False)
+    photo = sqlalchemy.Column(sqlalchemy.String, nullable=True)
+    number_liked_posts = sqlalchemy.Column(sqlalchemy.Integer, nullable=False, default=0)
+    number_own_posts = sqlalchemy.Column(sqlalchemy.Integer, nullable=False, default=0)
 
     def set_password(self, password):
         self.pwd = generate_password_hash(password)
