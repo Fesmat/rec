@@ -22,7 +22,6 @@ def index():
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
-    print('login')
     if current_user.is_authenticated:
         return redirect('/')
     form = LoginForm()
@@ -43,7 +42,6 @@ def login():
 
 @app.route('/register', methods=['POST', 'GET'])
 def register_user():
-    print('register')
     if current_user.is_authenticated:
         return redirect('/')
     form = RegisterForm()
