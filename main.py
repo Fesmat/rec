@@ -16,7 +16,7 @@ login_manager.init_app(app)
 @app.route('/index', methods=['GET'])
 def index():
     print(current_user)
-    if current_user.is_authenticated():
+    if current_user.is_authenticated:
         return 'That\'s CumImdb'
     return redirect('/login')
 
@@ -57,6 +57,7 @@ def register_user():
             user.surname = form.surname.data
             user.name = form.name.data
             user.age = form.age.data
+            user.description = form.description.data
             user.liked_films = 0
             user.liked_posts = 0
             db_sess.add(user)
