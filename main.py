@@ -94,6 +94,11 @@ def load_user(user_id):
     return db_sess.query(User).get(user_id)
 
 
+@app.route('/film_preview/<name>')
+def load_film_by_name(name):
+    pass
+
+
 if __name__ == '__main__':
     db_session.global_init("db/global.db")
     app.run(port=5000, host='127.0.0.1')
