@@ -7,19 +7,18 @@ from forms.login_user import LoginForm
 from forms.register_user import RegisterForm
 import logging
 
-
-
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '1Aj3sL12J09d43Ksp02A'
 login_manager = LoginManager()
 login_manager.init_app(app)
 logging.debug('Debug')
 
+
 @app.route('/', methods=['GET'])
 @app.route('/index', methods=['GET'])
 def index():
     if current_user.is_authenticated:
-        return 'That\'s CumImdb'
+        return render_template('1.php')
     return redirect('/login')
 
 
