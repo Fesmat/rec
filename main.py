@@ -1,16 +1,19 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, send_file
 from flask_login import login_user, LoginManager, current_user, login_required, logout_user
 from werkzeug.utils import redirect
 from data import db_session
 from data.users import User
 from forms.login_user import LoginForm
 from forms.register_user import RegisterForm
+import logging
+
+
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '1Aj3sL12J09d43Ksp02A'
 login_manager = LoginManager()
 login_manager.init_app(app)
-
+logging.debug('Debug')
 
 @app.route('/', methods=['GET'])
 @app.route('/index', methods=['GET'])
@@ -88,15 +91,16 @@ def logout():
     return redirect('/login')
 
 
+@app.route('/download/<path:path_to_file>')
+def download_image(path_to_file):
+    print('+++++')
+    return send_file(path_to_file)
+
+
 @login_manager.user_loader
 def load_user(user_id):
     db_sess = db_session.create_session()
     return db_sess.query(User).get(user_id)
-
-
-@app.route('/film_preview/<name>')
-def load_film_by_name(name):
-    pass
 
 
 if __name__ == '__main__':
