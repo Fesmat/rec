@@ -4,44 +4,22 @@ from bs4 import BeautifulSoup
 from pprint import pprint
 
 
-def search_film(film):
+def get_info(film_t):
     film_js = {}
-    r2 = requests.get(film)
+    r2 = requests.get('https://www.imdb.com/title' + film_t)
     film_js['url'] = r2.url
-    soup2 = BeautifulSoup(r2.text, 'html.parser')
-    image = soup2.find_all(property="og:image")
-    url = str(image[0]).split('"')[1]
-    film_js['pict_url'] = url
-    poster = urllib.request.urlopen(url).read()
-    title = (str(soup2.find_all(property="og:title")).split('"')[1])[:-7]
-    film_js['title'] = title
-    description = (str(soup2.find_all(property="og:description")).split('"')[1]).split('. ')
-    director = description[0][12:]
-    film_js['director'] = director
-    cast = description[1][6:]
-    film_js['cast'] = cast
-    synopsis = '. '.join(description[2:])
-    film_js['synopsis'] = synopsis
-    duration = str(soup2.find_all('time')[0]).split('>')[1].split('<')[0].strip()
-    film_js['duration'] = duration
-    rating = str(soup2.find_all('strong')[0]).split('"')[1].split()[0]
-    film_js['rating'] = rating
-    return film_js
-
-
-pprint(search_film('https://www.imdb.com/title/tt6723592/'))
-
-
-def get_info(g):
-    r2 = requests.get('https://www.imdb.com/title' + g)
     soup2 = BeautifulSoup(r2.text, 'html.parser')
     image = soup2.find_all(property="og:image")
     if image:
         url = str(image[0]).split('"')[1]
         poster = urllib.request.urlopen(url).read()
+        film_js['image_url'] = url
     title = (str(soup2.find_all(property="og:title")).split('"')[1])[:-7]
-    print(title)
+    film_js['title'] = title
     description = str(soup2.find_all(property="og:description")).split('<meta content=')[1].split(' property=')[0]
+    film_js['director'] = ''
+    film_js['cast'] = ''
+    film_js['synopsis'] = ''
     if description:
         description = description[1:-1]
         director = ''
@@ -50,7 +28,7 @@ def get_info(g):
         if 'Directed by' in description or 'Created by' in description:
             director = description.split('by ')[1].split('.  ')[0]
             description = description.split('by ')[1].split('.  ')[1]
-        print(director)
+        film_js['director'] = director
         if 'With' in description:
             cast = description.split('With ')[1].split('. ')[0]
             count = 1
@@ -62,16 +40,17 @@ def get_info(g):
                 description = description[1]
             else:
                 description = ''
-        print(cast)
+
+        film_js['cast'] = cast
         if description:
             synopsis = description
-        print(synopsis)
+        film_js['synopsis'] = synopsis
     duration = soup2.find_all('time')
     if duration:
         duration = str(duration[0]).split('>')[1].split('<')[0].strip()
     else:
         duration = '0min'
-    print(duration)
+    film_js['duration'] = duration
     rating = soup2.find_all('strong')
     if rating:
         rating = str(rating[0]).split('"')
@@ -81,22 +60,29 @@ def get_info(g):
             rating = '0.0'
     else:
         rating = '0.0'
-    print(rating)
+    film_js['rating'] = rating
+    return film_js
 
 
-r = requests.get('https://www.imdb.com/find?q=' + '+'.join(input().split()) + '&ref=_nv_sr_sm')
-soup = BeautifulSoup(r.text, 'html.parser')
-for i in soup:
-    for x in str(i).split('\n'):
-        if '<a href="/title' in str(x):
-            x = str(x)
-            g = x
-            g = (g.split('<a href="/title'))
-            k = 0
-            for film in g:
-                k += 1
-                if k % 2 == 0:
-                    continue
-                if film.startswith('/tt'):
-                    get_info(film.split('"')[0])
-            break
+def find_films(data):
+    r = requests.get('https://www.imdb.com/find?q=' + '+'.join(data.split()) + '&ref=_nv_sr_sm')
+    soup = BeautifulSoup(r.text, 'html.parser')
+    found_films = []
+    for i in soup:
+        for x in str(i).split('\n'):
+            if '<a href="/title' in str(x):
+                x = str(x)
+                g = x
+                g = (g.split('<a href="/title'))
+                k = 0
+                for film in g:
+                    k += 1
+                    if k % 2 == 0:
+                        continue
+                    if film.startswith('/tt'):
+                        found_films.append(get_info(film.split('"')[0]))
+                break
+    return found_films
+
+
+pprint(find_films(input()))
