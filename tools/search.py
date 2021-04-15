@@ -6,7 +6,9 @@ from pprint import pprint
 
 def primary_search(x):
     k = x.split(' </tr>')
+    films = []
     for mov in k:
+        film_js = {}
         if 'name/nm' in mov:
             continue
         if 'title' not in mov:
@@ -14,10 +16,10 @@ def primary_search(x):
         mov = '<a href="/title'.join(mov.split('<a href="/title')[1:])
         tt = mov.split('"')[0]
         url_movie = 'https://www.imdb.com/title' + tt
-        print(url_movie)
+        film_js['url'] = url_movie
         mov = 'img src="'.join(mov.split('img src="')[1:])
         url_image = mov.split('"')[0]
-        print(url_image)
+        film_js['image_url'] = url_image
         year = mov.split('</a> (')
         if len(year) > 1:
             year = year[1].split(')')[0]
@@ -35,7 +37,9 @@ def primary_search(x):
             title = mov.split('<')[0]
         if year:
             title += ' (' + year + ')'
-        print(title)
+        film_js['title'] = title
+        films.append(film_js)
+    return films
 
 
 def get_info(film_t):
@@ -106,17 +110,10 @@ def find_films(data):
         for x in str(i).split('\n'):
             if '<a href="/title' in str(x):
                 x = str(x)
-                primary_search(x)
-                g = (g.split('<a href="/title'))
-                k = 0
-                for film in g:
-                    k += 1
-                    if k % 2 == 0:
-                        continue
-                    if film.startswith('/tt'):
-                        found_films.append(get_info(film.split('"')[0]))
+                found_films = primary_search(x)
                 break
     return found_films
 
 
-pprint(find_films(input()))
+if __name__ == '__main__':
+    pprint(find_films(input()))

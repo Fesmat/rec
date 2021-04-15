@@ -43,6 +43,14 @@ $(function(){
 	$("#search").autocomplete({
 		source: langs
 	});
+	$.getJSON(
+  '/load_film/' + document.getElementsByTagName("input")[0].value.split(' ').join('_'),          // адрес отправки запроса  // передача с запросом каких-нибудь данных
+  function(data) {
+    $.each(data, function(val) {
+        langs.push(val.title)
+
+  }
+);
 
 });
 	</script>

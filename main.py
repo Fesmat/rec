@@ -1,4 +1,4 @@
-from flask import Flask, render_template, send_file
+from flask import Flask, render_template, send_file, jsonify
 from flask_login import login_user, LoginManager, current_user, login_required, logout_user
 from werkzeug.utils import redirect
 from data import db_session
@@ -6,6 +6,7 @@ from data.users import User
 from forms.login_user import LoginForm
 from forms.register_user import RegisterForm
 import logging
+from tools import search
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '1Aj3sL12J09d43Ksp02A'
@@ -94,6 +95,12 @@ def logout():
 def download_image(path_to_file):
     print('+++++')
     return send_file(path_to_file)
+
+
+@app.route('/load_films/<film>')
+def load_film(film):
+    film = ' '.join(film.split('_'))
+    return jsonify(search.find_films(film))
 
 
 @login_manager.user_loader
