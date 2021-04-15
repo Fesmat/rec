@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="..\css\my_page.css">
+    <link rel="stylesheet" href="\static\css\my_page.css">
     <title>my_page</title>
 </head>
 
@@ -36,7 +36,7 @@
             <div class="user-info">
                 <div class="photo">
                     <div class="photo-card">
-                        <img src="../img/avatar.jpg" alt="">
+                        <img src="/download/db/user_images/avatar.jpg">
                     </div>
                     <div class="edit_photo">
 
@@ -46,28 +46,19 @@
                 </div>
                 <div class="inf">
                     <div class="gen-info">
-                        <H1 style="text-align:center; font-family:Tahoma">Павел Шилин</H1>
-                        <h4 style="text-align:center; font-family:Tahoma">29лет</h4>
-                        <p style="text-align:center; font-family:Tahoma">Самый крутой программист на диком западе Не верите? Проверяйте!</p>
+                        <H1 style="text-align:center; font-family:Tahoma">{{current_user.name}} {{current_user.surname}}</H1>
+                        <h4 style="text-align:center; font-family:Tahoma">{{current_user.age}} лет</h4>
+                        <p style="text-align:center; font-family:Tahoma">{{current_user.description}}</p>
                     </div>
                     <div class="film-info">
                         <table class="film-info-table" cellpadding="10">
                             <tr>
                                 <td>
-                                    <k style="font-size: 30px; font-weight:500; ">85</k>
-                                    <p>минут</p>
-
-                                </td>
-                                <td>
-                                    <k style="font-size: 30px; font-weight:500; ">200</k>
-                                    <p>Фильмов</p>
-                                </td>
-                                <td>
-                                    <k style="font-size: 30px; font-weight:500; ">113</k>
+                                    <k style="font-size: 30px; font-weight:500; ">{{current_user.number_own_posts}}</k>
                                     <p>рецензий</p>
                                 </td>
                                 <td>
-                                    <k style="font-size: 30px; font-weight:500; ">8</k>
+                                    <k style="font-size: 30px; font-weight:500; ">{{current_user.number_liked_posts}}</k>
                                     <p>понравилось</p>
                                 </td>
                             </tr>
