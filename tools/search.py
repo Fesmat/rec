@@ -4,6 +4,40 @@ from bs4 import BeautifulSoup
 from pprint import pprint
 
 
+def primary_search(x):
+    k = x.split(' </tr>')
+    for mov in k:
+        if 'name/nm' in mov:
+            continue
+        if 'title' not in mov:
+            continue
+        mov = '<a href="/title'.join(mov.split('<a href="/title')[1:])
+        tt = mov.split('"')[0]
+        url_movie = 'https://www.imdb.com/title' + tt
+        print(url_movie)
+        mov = 'img src="'.join(mov.split('img src="')[1:])
+        url_image = mov.split('"')[0]
+        print(url_image)
+        year = mov.split('</a> (')
+        if len(year) > 1:
+            year = year[1].split(')')[0]
+            if not year.isdigit():
+                year = mov.split('</a> (')[1].split('(')
+                if len(year) > 1:
+                    year = year[1].split(')')[0]
+        else:
+            year = ''
+        if 'aka' in mov:
+            mov = '<i>"'.join(mov.split('<i>"')[1:])
+            title = mov.split('"')[0]
+        else:
+            mov = (tt + '">').join(mov.split(tt + '">')[1:])
+            title = mov.split('<')[0]
+        if year:
+            title += ' (' + year + ')'
+        print(title)
+
+
 def get_info(film_t):
     film_js = {}
     r2 = requests.get('https://www.imdb.com/title' + film_t)
@@ -72,7 +106,7 @@ def find_films(data):
         for x in str(i).split('\n'):
             if '<a href="/title' in str(x):
                 x = str(x)
-                g = x
+                primary_search(x)
                 g = (g.split('<a href="/title'))
                 k = 0
                 for film in g:
