@@ -112,7 +112,7 @@ def find_films(data):
                 x = str(x)
                 found_films = primary_search(x)
                 break
-    return found_films
+    return found_films[:3]
 
 
 if __name__ == '__main__':

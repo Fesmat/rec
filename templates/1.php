@@ -37,22 +37,22 @@
 
 	<script>
 $(function(){
-
-	var langs = ["ActionScript", "AppleScript", "Asp", "BASIC", "C", "C++", "Clojure", "COBOL", "ColdFusion", "Erlang", "Fortran", "Groovy", "Haskell", "Java", "JavaScript", "Lisp", "Perl", "PHP", "Python", "Ruby", "Scala", "Scheme"];
-
-	$("#search").autocomplete({
-		source: langs
-	});
-	$.getJSON(
-  '/load_film/' + document.getElementsByTagName("input")[0].value.split(' ').join('_'),          // адрес отправки запроса  // передача с запросом каких-нибудь данных
-  function(data) {
-    $.each(data, function(val) {
-        langs.push(val.title)
-
-  }
-);
-
+ $("#search").autocomplete({
+ source: ajaxCall
+ });
 });
+
+function ajaxCall() {
+$.getJSON('/load_films/' + document.getElementById("search").value.split(' ').join('_'),
+        function(data) {
+        var films = [];
+        $.each(data, function(k, v) {
+            return v.title
+        });
+        console.log(films)
+    });
+};
+
 	</script>
 
 </body>
