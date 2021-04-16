@@ -4,9 +4,9 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="/static/css/search.css">
 	<title>Поиск по фильмам</title>
 	<link rel="stylesheet" href="download/jquery-ui-1.12.1/jquery-ui.css">
+	<link rel="stylesheet" href="/static/css/search.css">
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -42,7 +42,7 @@ $(function(){
  create: function() {
       $(this).data('ui-autocomplete')._renderItem = function(ul, item) {
         return $('<li>')
-          .append('<a href="' + item.film_url + '"><img class="icon" src="' + item.icon + '" />'  + item.label + '</span>' + '<br>'  + '</a>')
+          .append('<div class="super-li"><a href="' + item.film_url + '"><img class="icon" src="' + item.icon + '" />'  + item.label + '<br>'  + '</a></div>')
           .appendTo(ul);
       };
     }
