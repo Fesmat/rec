@@ -4,7 +4,8 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Живой поиск</title>
+	<link rel="stylesheet" href="/static/css/search.css">
+	<title>Поиск по фильмам</title>
 	<link rel="stylesheet" href="download/jquery-ui-1.12.1/jquery-ui.css">
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -16,14 +17,13 @@
 	<div class="container content">
 <form class="form-horizontal" method="post" id="form">
 	<div class="form-group">
-		<label for="date" class="col-sm-2 control-label">Поиск</label>
 		<div class="col-sm-6">
 			<input type="text" class="form-control" id="search" name="search" placeholder="Поиск...">
 		</div>
 	</div>
 	<div class="form-group">
 		<div class="col-sm-offset-2 col-sm-6">
-			<button type="submit" id="submit" class="btn btn-primary">Отправить</button>
+			<button type="submit" id="submit" class="btn btn-primary"><img src="/static/img/film_search.png" style="width:100%;"></button>
 			<div></div>
 		</div>
 	</div>
@@ -56,7 +56,6 @@ $.getJSON('/load_films/' + document.getElementById("search").value.split(' ').jo
         response($.map(data, function(item) {
         return {'label': item.title, 'value': item.title, 'icon': item.image_url, 'film_url': item.url}
         }));
-        console.log(films);
     });
 };
 
