@@ -38,7 +38,14 @@
 	<script>
 $(function(){
  $("#search").autocomplete({
- source: ajaxCall
+ source: ajaxCall,
+ create: function() {
+      $(this).data('ui-autocomplete')._renderItem = function(ul, item) {
+        return $('<li>')
+          .append('<a href="' + item.film_url + '"><img class="icon" src="' + item.icon + '" />'  + item.label + '</span>' + '<br>'  + '</a>')
+          .appendTo(ul);
+      };
+    }
  });
 });
 
@@ -47,7 +54,7 @@ $.getJSON('/load_films/' + document.getElementById("search").value.split(' ').jo
         function(data) {
         var films = [];
         response($.map(data, function(item) {
-        return {'label': item.title, 'value': item.image_url}
+        return {'label': item.title, 'value': item.title, 'icon': item.image_url, 'film_url': item.url}
         }));
         console.log(films);
     });
