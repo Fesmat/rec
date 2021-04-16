@@ -42,14 +42,14 @@ $(function(){
  });
 });
 
-function ajaxCall() {
+function ajaxCall(request, response) {
 $.getJSON('/load_films/' + document.getElementById("search").value.split(' ').join('_'),
         function(data) {
         var films = [];
-        $.each(data, function(k, v) {
-            return v.title
-        });
-        console.log(films)
+        response($.map(data, function(item) {
+        return {'label': item.title, 'value': item.image_url}
+        }));
+        console.log(films);
     });
 };
 
