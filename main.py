@@ -79,6 +79,13 @@ def profile():
     return render_template('my_page.html')
 
 
+@app.route('/feed')
+def feed():
+    if not current_user.is_authenticated:
+        return redirect('/login')
+    return render_template('feed.html')
+
+
 @app.route('/search_films')
 def search_films():
     return render_template('search_films.html')
