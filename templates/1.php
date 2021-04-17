@@ -41,8 +41,9 @@ $(function(){
  source: ajaxCall,
  create: function() {
       $(this).data('ui-autocomplete')._renderItem = function(ul, item) {
-        return $('<li>')
-          .append('<div class="super-li"><a href="' + item.film_url + '"><img class="icon" src="' + item.icon + '" />'  + item.label + '<br>'  + '</a></div>')
+      ul.addClass('super_li');
+        return $('<li class="super_li">')
+          .append('<div class="super_li"><a href="' + item.film_url + '" style="text-decoration: none;"><img src="' + item.icon + '" />'  + '<p class="super_li">' + item.label + '</p>' + '</a></div>')
           .appendTo(ul);
       };
     }
