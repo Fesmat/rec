@@ -17,6 +17,7 @@ def primary_search(x):
         tt = mov.split('"')[0]
         url_movie = 'https://www.imdb.com/title' + tt
         film_js['url'] = url_movie
+        film_js['id'] = tt
         mov = 'img src="'.join(mov.split('img src="')[1:])
         url_image = mov.split('"')[0]
         film_js['image_url'] = url_image
@@ -44,13 +45,12 @@ def primary_search(x):
 
 def get_info(film_t):
     film_js = {}
-    r2 = requests.get('https://www.imdb.com/title' + film_t)
+    r2 = requests.get('https://www.imdb.com/title/' + film_t)
     film_js['url'] = r2.url
     soup2 = BeautifulSoup(r2.text, 'html.parser')
     image = soup2.find_all(property="og:image")
     if image:
         url = str(image[0]).split('"')[1]
-        poster = urllib.request.urlopen(url).read()
         film_js['image_url'] = url
     title = (str(soup2.find_all(property="og:title")).split('"')[1])[:-7]
     film_js['title'] = title

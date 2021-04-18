@@ -6,6 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Поиск по фильмам</title>
 	<link rel="stylesheet" href="download/jquery-ui-1.12.1/jquery-ui.css">
+	<link rel="stylesheet" href="/static/css/my_page.css">
 	<link rel="stylesheet" href="/static/css/search.css">
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -13,7 +14,28 @@
 <![endif]-->
 </head>
 <body>
-
+ <div class="header">
+        <p>CumImdb</p>
+    </div>
+    <div class="main">
+        <div class="menu">
+            <div class="top-menu-item">
+                <p> Что посмотреть?</p>
+            </div>
+            <div class="menu-item">
+                <p>Сообщения</p>
+            </div>
+            <div class="menu-item">
+                <p>Друзья</p>
+            </div>
+            <div class="menu-item">
+            <a href="/search_films" style="text-decoration: none; color: black;"><p>Поиск</p></a>
+        </div>
+        <div class="menu-item">
+            <a href="/profile" style="text-decoration: none; color: black;"><p>Я</p></a>
+        </div>
+        </div>
+        </div>
 	<div class="container content">
 <form class="form-horizontal" method="post" id="form">
 	<div class="form-group">
@@ -43,7 +65,7 @@ $(function(){
       $(this).data('ui-autocomplete')._renderItem = function(ul, item) {
       ul.addClass('super_li');
         return $('<li class="super_li">')
-          .append('<div class="super_li"><a href="' + item.film_url + '" style="text-decoration: none;"><img src="' + item.icon + '" />'  + '<p class="super_li">' + item.label + '</p>' + '</a></div>')
+          .append('<div class="super_li"><a href="/film' + item.tt_id + '" style="text-decoration: none;"><img src="' + item.icon + '" />'  + '<p class="super_li">' + item.label + '</p>' + '</a></div>')
           .appendTo(ul);
       };
     }
@@ -55,7 +77,7 @@ $.getJSON('/load_films/' + document.getElementById("search").value.split(' ').jo
         function(data) {
         var films = [];
         response($.map(data, function(item) {
-        return {'label': item.title, 'value': item.title, 'icon': item.image_url, 'film_url': item.url}
+        return {'label': item.title, 'value': item.title, 'icon': item.image_url, 'film_url': item.url, 'tt_id': item.id}
         }));
     });
 };

@@ -1,0 +1,29 @@
+.posterWithPlotSummary {
+    width: 100%;
+    float: left;
+    height: 445px;
+}
+.poster {
+    float: left;
+    height: 445px;
+    width: 250px;
+}
+.poster_inner {
+    margin-left: 25px;
+    margin-top: 25px;
+    height: 400px;
+}
+.title {
+    font-size: 2em;
+    text-align: center;
+}
+.film-info {
+    float: left;
+    height: 300px;
+    margin-left: 50px;
+    width: 600px;
+}
+.synopsis, .director, .cast, .duration, .rating {
+    text-align: right;
+    font-size: 20px;
+}
