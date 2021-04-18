@@ -20,6 +20,7 @@ class User(SqlAlchemyBase, UserMixin, SerializerMixin):
     photo = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     number_liked_posts = sqlalchemy.Column(sqlalchemy.Integer, nullable=False, default=0)
     number_own_posts = sqlalchemy.Column(sqlalchemy.Integer, nullable=False, default=0)
+    friends = sqlalchemy.Column(sqlalchemy.String, nullable=True)
 
     def set_password(self, password):
         self.pwd = generate_password_hash(password)
