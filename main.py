@@ -1,3 +1,5 @@
+from pprint import pprint
+
 from flask import Flask, render_template, send_file, jsonify
 from flask_login import login_user, LoginManager, current_user, login_required, logout_user
 from werkzeug.utils import redirect
@@ -19,7 +21,7 @@ logging.debug('Debug')
 @app.route('/index', methods=['GET'])
 def index():
     if current_user.is_authenticated:
-        return render_template('1.php')
+        return 'That\'s CumImdb'
     return redirect('/login')
 
 
@@ -36,7 +38,6 @@ def login():
             login_user(user, remember=form.remember_me.data)
             return redirect("/")
         db_sess.close()
-        print('+++')
         return render_template('login.html',
                                message="Неверный логин или пароль",
                                form=form)
@@ -88,7 +89,7 @@ def feed():
 
 @app.route('/search_films')
 def search_films():
-    return render_template('search_films.html')
+    return render_template('search_films.php')
 
 
 @app.route("/logout")
@@ -100,7 +101,6 @@ def logout():
 
 @app.route('/download/<path:path_to_file>')
 def download_image(path_to_file):
-    print('+++++')
     return send_file(path_to_file)
 
 
@@ -108,6 +108,14 @@ def download_image(path_to_file):
 def load_film(film):
     film = ' '.join(film.split('_'))
     return jsonify(search.find_films(film))
+
+
+@app.route('/film/<film_id>')
+@app.route('/film/<film_id>/')
+def get_film(film_id):
+    print(film_id[0:])
+    film = search.get_info(film_id[0:])
+    return render_template('film.html', film=film)
 
 
 @login_manager.user_loader
