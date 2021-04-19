@@ -1,50 +1,15 @@
 <!DOCTYPE html>
-<html lang="ru">
-
+<html lang="en">
 <head>
-
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="..\static\css\my_page.css">
+    <title>{{user.name}} {{user.surname}}</title>
     <link rel="stylesheet" href="/static/css/my_page.css">
-    <title>My page</title>
 </head>
-
 <body>
-    <div class="header">
-        <p>CumImdb</p>
-    </div>
-    <div class="main">
-        <div class="menu">
-            <div class="top-menu-item">
-                <p> Что посмотреть?</p>
-            </div>
-            <div class="menu-item">
-                <p>Сообщения</p>
-            </div>
-            <div class="menu-item">
-                <p>Друзья</p>
-            </div>
-            <div class="menu-item">
-                <p>Поиск</p>
-            </div>
-            <div class="menu-item">
-                <p>я</p>
-            </div>
-        </div>
-        <div class="info">
-            <div class="user-info">
-                <div class="photo">
-                    <div class="photo-card">
-                        <img src="../download/db/user_images/avatar.jpg">
-                    </div>
-                    <div class="edit_photo">
 <div class="header">
     <p>CumImdb</p>
 </div>
-<div class="main">
-    <div class="menu">
+<div class="menu">
         <div class="top-menu-item">
             <p> Что посмотреть?</p>
         </div>
@@ -67,28 +32,23 @@
                 <div class="photo-card">
                     <img src="/download/db/user_images/avatar.jpg">
                 </div>
-                <div class="edit_photo">
-
-                    <button class="btn_edit">Редактировать</button>
-
-                </div>
             </div>
             <div class="inf">
                 <div class="gen-info">
-                    <H1 style="text-align:center; font-family:Tahoma">{{current_user.name}}
-                        {{current_user.surname}}</H1>
-                    <h4 style="text-align:center; font-family:Tahoma">{{current_user.age}} лет</h4>
-                    <p style="text-align:center; font-family:Tahoma">{{current_user.description}}</p>
+                    <H1 style="text-align:center; font-family:Tahoma">{{user.name}}
+                        {{user.surname}}</H1>
+                    <h4 style="text-align:center; font-family:Tahoma">{{user.age}} лет</h4>
+                    <p style="text-align:center; font-family:Tahoma">{{user.description}}</p>
                 </div>
                 <div class="film-info">
                     <table class="film-info-table" cellpadding="10">
                         <tr>
                             <td>
-                                <k style="font-size: 30px; font-weight:500; ">{{current_user.number_own_posts}}</k>
+                                <k style="font-size: 30px; font-weight:500; ">{{user.number_own_posts}}</k>
                                 <p>рецензий</p>
                             </td>
                             <td>
-                                <k style="font-size: 30px; font-weight:500; ">{{current_user.number_liked_posts}}</k>
+                                <k style="font-size: 30px; font-weight:500; ">{{user.number_liked_posts}}</k>
                                 <p>понравилось</p>
                             </td>
                         </tr>
@@ -121,6 +81,5 @@
             </div>
         </div>
     </div>
-</div>
 </body>
 </html>

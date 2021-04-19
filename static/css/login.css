@@ -1,0 +1,49 @@
+.form-body{
+width:500px;
+height:350px;
+margin:auto;
+border-radius:10px;
+background-color:#1a1a1a;
+color:white;
+font-family: Tahoma;
+text-align:center;
+vertical-align:middle;
+padding:auto;
+padding-top:15px;
+font-size:22px;
+}
+.go-btn{
+width:100px;
+height:40px;
+background-color:white;
+border-radius:8px;
+font-size:20px;
+}
+.go-btn:hover{
+background-color:#ceff1d;
+ transition: 0.3s linear;
+
+}
+.rememb-txt{
+font-size:17px;
+}
+
+.registr-btn{
+width:150px;
+height:30px;
+background-color:#white;
+border-radius:8px;
+font-size:17px;
+}
+
+.registr-btn:hover{
+background-color:#ceff1d;
+ transition: 0.3s linear;
+}
+
+.field{
+    width:250px;
+    border-radius:2px;
+    height:20px;
+    border-radius:10px;
+}

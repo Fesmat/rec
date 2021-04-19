@@ -1,5 +1,3 @@
-from pprint import pprint
-
 from flask import Flask, render_template, send_file, jsonify
 from flask_login import login_user, LoginManager, current_user, login_required, logout_user
 from werkzeug.utils import redirect
@@ -8,7 +6,7 @@ from data.users import User
 from forms.login_user import LoginForm
 from forms.register_user import RegisterForm
 import logging
-from tools import search
+from tools import search, user_search
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '1Aj3sL12J09d43Ksp02A'
@@ -89,6 +87,8 @@ def feed():
 
 @app.route('/search_films')
 def search_films():
+    if not current_user.is_authenticated:
+        return redirect('/login')
     return render_template('search_films.php')
 
 
@@ -113,9 +113,24 @@ def load_film(film):
 @app.route('/film/<film_id>')
 @app.route('/film/<film_id>/')
 def get_film(film_id):
-    print(film_id[0:])
-    film = search.get_info(film_id[0:])
+    if not current_user.is_authenticated:
+        return redirect('/login')
+    film = search.get_info(film_id)
     return render_template('film.html', film=film)
+
+
+@app.route('/user/<user_id>')
+def render_user(user_id):
+    if not current_user.is_authenticated:
+        return redirect('/login')
+    if int(user_id) == current_user.id:
+        return redirect('/profile')
+    return render_template('user.html', user=user_search.search_user(int(user_id)))
+
+
+@app.errorhandler(404)
+def error_not_found(error):
+    return 'Че-то попутал, товарищ'
 
 
 @login_manager.user_loader
