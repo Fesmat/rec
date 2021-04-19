@@ -141,11 +141,11 @@ def load_user(user_id):
 
 
 if __name__ == '__main__':
+    db_session.global_init("db/global.db")
     post = Post()
     post.creator_id = "1"
     post.text = "Привет текст первый"
     db_sess = db_session.create_session()
     db_sess.add(post)
     db_sess.commit()
-    db_session.global_init("db/global.db")
     app.run(port=5000, host='127.0.0.1')
