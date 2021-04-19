@@ -20,7 +20,7 @@
     <div class="main">
         <div class="menu">
             <div class="top-menu-item">
-                <p> Что посмотреть?</p>
+                <a href="/feed" style="text-decoration: none; color: black;"><p> Что посмотреть?</p></a>
             </div>
             <div class="menu-item">
                 <p>Сообщения</p>
