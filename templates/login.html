@@ -1,29 +1,40 @@
-<!DOCTYPE html>
-<html>
-<h1>Авторизация</h1>
-<form action="" method="post">
-    {{ form.hidden_tag() }}
-    <p>
-        {{ form.login.label }}<br>
-        {{ form.login(class="form-control", type="email") }}<br>
-        {% for error in form.login.errors %}
-    <div class="alert alert-danger" role="alert">
-        {{ error }}
-    </div>
-    {% endfor %}
-    </p>
-    <p>
-        {{ form.pwd.label }}<br>
-        {{ form.pwd(class="form-control", type="password") }}<br>
-        {% for error in form.pwd.errors %}
-    <div class="alert alert-danger" role="alert">
-        {{ error }}
-    </div>
-    {% endfor %}
-    </p>
-    <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
-    <p>{{ form.submit(type="submit", class="btn btn-primary") }}</p>
-    <div>{{ message }}</div>
-    <button onclick="window.location.href = '/register';" type="button">Еще не зарегистрировались?</button>
-</form>
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/static/css/login.css">
+    <title>Document</title>
+</head>
+<body>
+<div class="form-body">
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.login.label }}<br>
+            {{ form.login(class="form-control field", type="email") }}<br>
+            {% for error in form.login.errors %}
+        <div class="alert alert-danger" role="alert">
+            {{ error }}
+        </div>
+        {% endfor %}
+        </p>
+        <p>
+            {{ form.pwd.label }}<br>
+            {{ form.pwd(class="form-control field", type="password") }}<br>
+            {% for error in form.pwd.errors %}
+        <div class="alert alert-danger" role="alert">
+            {{ error }}
+        </div>
+        {% endfor %}
+        </p>
+        <p>{{ form.remember_me() }} {{ form.remember_me.label(class="rememb-txt") }}</p>
+        <p>{{ form.submit(type="submit", class="btn btn-primary go-btn") }}</p>
+        <div>{{ message }}</div>
+        <button onclick="window.location.href = '/register';" type="button" class="registr-btn">Регистрация</button>
+    </form>
+</div>
+</body>
 </html>
