@@ -28,6 +28,8 @@ def primary_search(x):
                 year = mov.split('</a> (')[1].split('(')
                 if len(year) > 1:
                     year = year[1].split(')')[0]
+                if type(year) != str or not year.isdigit():
+                    year = ''
         else:
             year = ''
         if 'aka' in mov:
