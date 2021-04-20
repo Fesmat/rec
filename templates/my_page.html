@@ -71,26 +71,34 @@
                 блок друзей
             </div>
             <div class="feed">
+                {% block content %}
+                {% for item in posts%}
                 <div class="post">
                     <div class="post-owner-info">
                         <div class="post-mini-image"><img src="/download/db/user_images/avatar.jpg"
                                                           style="border-radius: 100px; border:2px solid #ceff1d"
                                                           width="80%" height="80%"></div>
                         <div class="post-owner">
-                            <k>Павел Шилин</k>
+                            <k>{{current_user.name}}</k>
                             <br>
-                            <k>19:17</k>
+                            <k>{{item.creation_date.strftime('%H:%M')}}</k>
                         </div>
                         <div class="post-menu"></div>
                     </div>
                     <div class="post-content">
-                        <div class="poster"></div>
-                        <div class="note"></div>
+                        <div class="poster">Тут Дкенис сделает постер</div>
+                        <div class="note">{{item.text}}</div>
                     </div>
                 </div>
+                {% endfor %}
+                {% endblock %}
             </div>
         </div>
     </div>
 </div>
 </body>
 </html>
+
+
+
+
