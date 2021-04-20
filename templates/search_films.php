@@ -14,9 +14,10 @@
 <![endif]-->
 </head>
 <body>
- <div class="header">
-        <p>CumImdb</p>
-    </div>
+<div class="header">
+    <k class="logo">CumImdb</k>
+    <a href="/logout" class="logout">Выйти</a>
+</div>
     <div class="main">
         <div class="menu">
             <div class="top-menu-item">
@@ -46,7 +47,6 @@
 	<div class="form-group">
 		<div class="col-sm-offset-2 col-sm-6">
 			<button type="submit" id="submit" class="btn btn-primary"><img src="/static/img/film_search.png" style="width:100%;"></button>
-			<div></div>
 		</div>
 	</div>
 </form>
