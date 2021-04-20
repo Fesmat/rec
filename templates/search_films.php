@@ -20,7 +20,7 @@
     <div class="main">
         <div class="menu">
             <div class="top-menu-item">
-                <p> Что посмотреть?</p>
+                <a href="/feed" style="text-decoration: none; color: black;"><p> Что посмотреть?</p></a>
             </div>
             <div class="menu-item">
                 <p>Сообщения</p>
@@ -63,9 +63,8 @@ $(function(){
  source: ajaxCall,
  create: function() {
       $(this).data('ui-autocomplete')._renderItem = function(ul, item) {
-      ul.addClass('super_li');
         return $('<li class="super_li">')
-          .append('<div class="super_li"><a href="/film' + item.tt_id + '" style="text-decoration: none;"><img src="' + item.icon + '" />'  + '<p class="super_li">' + item.label + '</p>' + '</a></div>')
+          .append('<div class="super_li"><a style="width: 100%; height: 100%; text-decoration: none;" href="/film' + item.tt_id + '"><img src="' + item.icon + '" />'  + '<p class="super_li">' + item.label + '</p></a></div>')
           .appendTo(ul);
       };
     }

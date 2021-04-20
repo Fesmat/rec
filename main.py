@@ -134,7 +134,7 @@ def render_user(user_id):
 
 @app.errorhandler(404)
 def error_not_found(error):
-    return 'Че-то попутал, товарищ'
+    return render_template('error404.html')
 
 
 @login_manager.user_loader
