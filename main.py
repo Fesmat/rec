@@ -144,7 +144,7 @@ def load_user(user_id):
 
 
 if __name__ == '__main__':
-    db_session.global_init("db/global.db")
+    db_session.global_init("static/css/global.db")
     db_sess = db_session.create_session()
     '''post = Post()
     post.creator_id = "1"
