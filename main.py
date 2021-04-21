@@ -1,5 +1,6 @@
-from flask import Flask, render_template, send_file, jsonify
+from flask import Flask, render_template, send_file, jsonify, request
 from flask_login import login_user, LoginManager, current_user, login_required, logout_user
+from flask_restful import abort
 from werkzeug.utils import redirect
 from data import db_session
 from data.users import User
@@ -89,11 +90,13 @@ def feed():
     return render_template('feed.html')
 
 
-@app.route('/search_films')
+@app.route('/search_films', methods=['POST', 'GET'])
 def search_films():
-    if not current_user.is_authenticated:
-        return redirect('/login')
-    return render_template('search_films.php')
+    if request.method == 'GET':
+        if not current_user.is_authenticated:
+            return redirect('/login')
+        return render_template('search_films.php', film_title='')
+    return render_template('search_films.php', film_title=dict(request.form)['search'])
 
 
 @app.route("/logout")
@@ -108,10 +111,14 @@ def download_image(path_to_file):
     return send_file(path_to_file)
 
 
-@app.route('/load_films/<film>')
-def load_film(film):
+@app.route('/load_films/<film>/<n>')
+def load_film(film, n):
     film = ' '.join(film.split('_'))
-    return jsonify(search.find_films(film))
+    if n.isdigit():
+        return jsonify(search.find_films(film, int(n)))
+    if n == '*':
+        return jsonify(search.find_films(film, -1))
+    abort(404)
 
 
 @app.route('/film/<film_id>')
@@ -144,7 +151,7 @@ def load_user(user_id):
 
 
 if __name__ == '__main__':
-    db_session.global_init("static/css/global.db")
+    db_session.global_init("db/global.db")
     db_sess = db_session.create_session()
     '''post = Post()
     post.creator_id = "1"

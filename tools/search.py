@@ -104,7 +104,7 @@ def get_info(film_t):
     return film_js
 
 
-def find_films(data):
+def find_films(data, n):
     r = requests.get('https://www.imdb.com/find?q=' + '+'.join(data.split()) + '&ref=_nv_sr_sm')
     soup = BeautifulSoup(r.text, 'html.parser')
     found_films = []
@@ -114,7 +114,9 @@ def find_films(data):
                 x = str(x)
                 found_films = primary_search(x)
                 break
-    return found_films[:5]
+    if n == -1:
+        return found_films[:]
+    return found_films[:n]
 
 
 if __name__ == '__main__':
