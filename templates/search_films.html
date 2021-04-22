@@ -37,7 +37,7 @@
         </div>
     </div>
 </div>
-<div class="container content">
+<div class="container content" id="cont-cont">
     <form class="form-horizontal" method="post" id="form">
         <div class="form-group">
             <div class="col-sm-6">
@@ -92,12 +92,23 @@ $.getJSON('/load_films/' + document.getElementById("search").value.split(' ').jo
 <script>
     var film_title = document.getElementById('search').value.split(' ').join('_');
     var films = [];
+    var block_films = document.createElement('div');
+    block_films.setAttribute('class', 'block_films');
     $.getJSON('/load_films/' + film_title + '/*', function(data) {
         var elem = null;
+        var p_cl = null;
+        var im_cl = null;
         $.map(data, function(item) {
-        alert(item);
-        elem = document.createElement('<div>' + item.title + '</div>');
+        elem = block_films.appendChild(document.createElement('div'));
+        elem.setAttribute('class', 'film_short_info');
+        im_cl = elem.appendChild(document.createElement('img'));
+        im_cl.setAttribute('src', item.image_url);
+        im_cl.setAttribute('class', 'film_image');
+        p_cl = elem.appendChild(document.createElement('k'));
+        p_cl.innerHTML = item.title;
+        p_cl.setAttribute('class', 'film_title');
         });
+    document.body.appendChild(block_films);
     });
 
 
