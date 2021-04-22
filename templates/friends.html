@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div class="form-body">
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <p>
+         <div class="post-mini-image"><img src="/download/db/user_images/avatar.jpg"
+                                                          style="border-radius: 100px; border:2px solid #ceff1d"
+                                                          width="5%" height="5%"></div>
+            {{ form.username.label}}
+            {{ form.unfriend(type="submit", class="btn btn-primary go-btn") }}
+        </p>
+        <div>{{ message }}</div>
+    </form>
+</div>
+</body>
+</html>

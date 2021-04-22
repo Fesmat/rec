@@ -1,0 +1,30 @@
+.form-body{
+margin:auto;
+background-color:#1a1a1a;
+color:white;
+font-family: Tahoma;
+text-align:center;
+vertical-align:middle;
+font-size:22px;
+}
+
+.form-control {
+font-size=17px;
+width:250px;
+border-radius:2px;
+height:20px;
+border-radius:10px;
+}
+
+.btn-primary{
+width:200px;
+height:40px;
+background-color:white;
+border-radius:8px;
+font-size:20px;
+}
+
+.btn-primary:hover{
+background-color:#ceff1d;
+transition: 0.3s linear;
+}
