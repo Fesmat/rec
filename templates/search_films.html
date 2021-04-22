@@ -41,7 +41,7 @@
     <form class="form-horizontal" method="post" id="form">
         <div class="form-group">
             <div class="col-sm-6">
-                <input type="text" class="form-control" id="search" name="search" placeholder="Поиск...">
+                <input type="text" class="form-control" id="search" name="search" placeholder="Поиск..." value={{inp}}>
             </div>
         </div>
         <div class="form-group">
@@ -88,16 +88,18 @@ $.getJSON('/load_films/' + document.getElementById("search").value.split(' ').jo
 
 
 </script>
-{% if film_title %}
+{% if type_post %}
 <script>
-        var film_title = $(this).attr('film_title').split(' ').join('_');
-        $.getJSON('/load_films/' + film_title + '/*', function(data) {
-            var films = data;
-        });
-        $.map(films, function(item) {
+    var film_title = document.getElementById('search').value.split(' ').join('_');
+    var films = [];
+    $.getJSON('/load_films/' + film_title + '/*', function(data) {
+        var elem = null;
+        $.map(data, function(item) {
         alert(item);
-            var elem = document.createElement('<div>' + item.title + '</div>');
-            });
+        elem = document.createElement('<div>' + item.title + '</div>');
+        });
+    });
+
 
 </script>
 {% endif %}

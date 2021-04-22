@@ -95,8 +95,8 @@ def search_films():
     if request.method == 'GET':
         if not current_user.is_authenticated:
             return redirect('/login')
-        return render_template('search_films.php', film_title='')
-    return render_template('search_films.php', film_title=dict(request.form)['search'])
+        return render_template('search_films.html', type_post=False, inp='')
+    return render_template('search_films.html', type_post=True, inp=dict(request.form)['search'])
 
 
 @app.route("/logout")
@@ -155,7 +155,7 @@ if __name__ == '__main__':
     db_sess = db_session.create_session()
     '''post = Post()
     post.creator_id = "1"
-    post.text = "Привет текст первый"
+    post.text = "Привет текст второй"
     db_sess.add(post)
     db_sess.commit()'''
     app.run(port=5000, host='127.0.0.1')
