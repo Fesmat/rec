@@ -1,25 +1,51 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/my_page.css">
+    <link rel="stylesheet" href="/static/css/friends.css">
+    <title>Friends</title>
 </head>
+
 <body>
-<div class="form-body">
-    <form action="" method="post">
-        {{ form.hidden_tag() }}
-        <p>
-         <div class="post-mini-image"><img src="/download/db/user_images/avatar.jpg"
-                                                          style="border-radius: 100px; border:2px solid #ceff1d"
-                                                          width="5%" height="5%"></div>
+<div class="header">
+    <k class="logo">CumImdb</k>
+    <a href="/logout" class="logout">Выйти</a>
+</div>
+<div class="main">
+    <div class="menu">
+        <div class="top-menu-item">
+            <a href="/feed" style="text-decoration: none; color: black;"><p> Что посмотреть?</p></a>
+        </div>
+        <div class="menu-item">
+            <p>Сообщения</p>
+        </div>
+        <div class="menu-item">
+            <a href="/friends" style="text-decoration: none; color: black;"><p>Друзья</p></a>
+        </div>
+        <div class="menu-item">
+            <a href="/search_films" style="text-decoration: none; color: black;"><p>Поиск</p></a>
+        </div>
+        <div class="menu-item">
+            <a href="/profile" style="text-decoration: none; color: black;"><p>Я</p></a>
+        </div>
+    </div>
+
+    <div class="form-body">
+        <form action="" method="post">
+            {{ form.hidden_tag() }}
+            <p>
+            <div class="post-mini-image"><img src="/download/db/user_images/avatar.jpg"
+                                              style="border-radius: 100px; border:2px solid #ceff1d"
+                                              width="5%" height="5%"></div>
             {{ form.username.label}}
             {{ form.unfriend(type="submit", class="btn btn-primary go-btn") }}
-        </p>
-        <div>{{ message }}</div>
-    </form>
+            </p>
+            <div>{{ message }}</div>
+        </form>
+    </div>
 </div>
 </body>
 </html>

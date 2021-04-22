@@ -9,7 +9,7 @@ from forms.register_user import RegisterForm
 import logging
 from data.posts import Post
 from tools import search, user_search
-
+from forms.friends import FriendsForm
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '1Aj3sL12J09d43Ksp02A'
 login_manager = LoginManager()
@@ -97,6 +97,14 @@ def search_films():
     if request.method == 'GET':
         return render_template('search_films.html', type_post=False, inp='')
     return render_template('search_films.html', type_post=True, inp=dict(request.form)['search'])
+
+
+@app.route('/friends')
+def friends():
+    if not current_user.is_authenticated:
+        return redirect('/login')
+    form = FriendsForm()
+    return render_template('friends.html', form=form)
 
 
 @app.route("/logout")
