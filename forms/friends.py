@@ -7,3 +7,4 @@ class FriendsForm(FlaskForm):
     username = StringField('Кирилл Воробьев')
     user_photo = FileField(validators=[FileRequired()])
     unfriend = SubmitField('Удалить из друзей')
+    make_friend = SubmitField('Добавить в друзья')

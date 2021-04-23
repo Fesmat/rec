@@ -1,6 +1,5 @@
 .form-body{
 margin:auto;
-background-color:#1a1a1a;
 color:white;
 font-family: Tahoma;
 text-align:center;
@@ -27,4 +26,24 @@ font-size:20px;
 .btn-primary:hover{
 background-color:#ceff1d;
 transition: 0.3s linear;
+}
+.form-body {
+    float:left;
+    margin-top: 80px;
+    margin-left: 30px;
+    width: 700px;
+}
+.info-user {
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    top: 15px;
+    position: relative;
+}
+.user-friends-div {
+    background-color:#1a1a1a;
+    height: 74px;
+}
+.user-friends {
 }

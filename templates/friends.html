@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -34,17 +34,26 @@
     </div>
 
     <div class="form-body">
-        <form action="" method="post">
-            {{ form.hidden_tag() }}
-            <p>
-            <div class="post-mini-image"><img src="/download/db/user_images/avatar.jpg"
-                                              style="border-radius: 100px; border:2px solid #ceff1d"
-                                              width="5%" height="5%"></div>
-            {{ form.username.label}}
-            {{ form.unfriend(type="submit", class="btn btn-primary go-btn") }}
-            </p>
-            <div>{{ message }}</div>
-        </form>
+        <div class="user-friends">
+            <p style="color: black; font-family: Tahoma; text-align: center;">Ваши друзья</p>
+            <div class="user-friends-div">
+
+                <form action="" method="post" style="margin-left: 5px; margin-top: 5px; width:auto; height: auto; top: 2px;">
+                    {{ form.hidden_tag() }}
+
+                    <div class="post-mini-image" style="padding-bottom: 4px;"><img
+                            src="/download/db/user_images/avatar.jpg"
+                            style="border-radius: 100px; border:2px solid #ceff1d;"
+                            width=auto height=60px></div>
+                    <div class="info-user">
+                        {{ form.username.label}}
+                        {{ form.unfriend(type="submit", class="btn btn-primary go-btn") }}
+                    </div>
+
+                    <div>{{ message }}</div>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 </body>
