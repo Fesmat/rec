@@ -1,0 +1,49 @@
+.form-body{
+margin:auto;
+color:white;
+font-family: Tahoma;
+text-align:center;
+vertical-align:middle;
+font-size:22px;
+}
+
+.form-control {
+font-size=17px;
+width:250px;
+border-radius:2px;
+height:20px;
+border-radius:10px;
+}
+
+.btn-primary{
+width:200px;
+height:40px;
+background-color:white;
+border-radius:8px;
+font-size:20px;
+}
+
+.btn-primary:hover{
+background-color:#ceff1d;
+transition: 0.3s linear;
+}
+.form-body {
+    float:left;
+    margin-top: 80px;
+    margin-left: 30px;
+    width: 700px;
+}
+.info-user {
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    top: 15px;
+    position: relative;
+}
+.user-friends-div {
+    background-color:#1a1a1a;
+    height: 74px;
+}
+.user-friends {
+}
