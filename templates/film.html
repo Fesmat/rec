@@ -8,8 +8,7 @@
 </head>
 <body>
 <div class="header">
-    <k class="logo">CumImdb</k>
-    <a href="/logout" class="logout">Выйти</a>
+    <p>CumImdb</p>
 </div>
 <div class="main">
     <div class="menu">
@@ -20,7 +19,7 @@
             <p>Сообщения</p>
         </div>
         <div class="menu-item">
-            <a href="/friends" style="text-decoration: none; color: black;"><p>Друзья</p></a>
+            <p>Друзья</p>
         </div>
         <div class="menu-item">
             <a href="/search_films" style="text-decoration: none; color: black;"><p>Поиск</p></a>
@@ -41,11 +40,16 @@
                     <h1 class="title">{{film.title}}</h1>
                 </div>
                 <div class="film_info">
-                    <p class="synopsis">{{film.synopsis}}</p>
-                    <p class="director">Director: {{film.director}}</p>
-                    <p class="cast">Cast: {{film.cast}}</p>
-                    <p class="duration">Duration: {{film.duration}}</p>
-                    <a href="{{film.url}}" target="_blank" style="text-decoration: none; color: black;"><p class="rating">IMDB rating: {{film.rating}}</p></a>
+                    <div class="synopsis">{{film.synopsis}}</div>
+                    <div class="director">Director: {{film.director}}</div>
+                    <div class="cast">Cast: {{film.cast}}</div>
+                    <div class="duration">Duration: {{film.duration}}</div>
+                    <a href="{{film.url}}" target="_blank" style="text-decoration: none; color: black;"><p
+                            class="rating">IMDB rating: {{film.rating}}</p></a>
+                    <form action="" method="POST">
+                        <input name="text">
+                        <input type="submit">
+                    </form>
                 </div>
             </div>
         </div>
