@@ -9,7 +9,8 @@ from forms.register_user import RegisterForm
 import logging
 from data.posts import Post
 from tools import search, user_search
-from forms.friends import FriendsForm
+from handlers.friendly_file import make_friend, get_friends, get_maybe_friends, delete_friend
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '1Aj3sL12J09d43Ksp02A'
 login_manager = LoginManager()
@@ -99,12 +100,20 @@ def search_films():
     return render_template('search_films.html', type_post=True, inp=dict(request.form)['search'])
 
 
-@app.route('/friends')
+@app.route('/friends', methods=['POST', 'GET'])
 def friends():
     if not current_user.is_authenticated:
         return redirect('/login')
-    form = FriendsForm()
-    return render_template('friends.html', form=form)
+    if request.method == 'POST':
+        form = request.form
+        args = dict(form)
+        user_id = args[list(args.keys())[0]]
+        if list(args.keys())[0].startswith('make_friend'):
+            make_friend(current_user, int(user_id))
+        elif list(args.keys())[0].startswith('unfriend'):
+            delete_friend(current_user, int(user_id))
+    return render_template('friends.html', friends=get_friends(current_user),
+                           may_be_friends=get_maybe_friends(current_user))
 
 
 @app.route("/logout")
