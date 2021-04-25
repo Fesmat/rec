@@ -1,59 +1,88 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
+
 <head>
+
     <meta charset="UTF-8">
-    <title>Фильм</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/css/my_page.css">
     <link rel="stylesheet" href="/static/css/film.css">
+    <title>film1</title>
 </head>
+
 <body>
-<div class="header">
-    <p>CumImdb</p>
-</div>
-<div class="main">
-    <div class="menu">
-        <div class="top-menu-item">
-            <a href="/feed" style="text-decoration: none; color: black;"><p> Что посмотреть?</p></a>
-        </div>
-        <div class="menu-item">
-            <p>Сообщения</p>
-        </div>
-        <div class="menu-item">
-            <p>Друзья</p>
-        </div>
-        <div class="menu-item">
-            <a href="/search_films" style="text-decoration: none; color: black;"><p>Поиск</p></a>
-        </div>
-        <div class="menu-item">
-            <a href="/profile" style="text-decoration: none; color: black;"><p>Я</p></a>
-        </div>
+    <div class="header">
+        <k class="logo">CumImdb</k>
+        <a href="/logout" class="logout">Выйти</a>
     </div>
-    <div class="info">
-        <div class="posterWithPlotSummary">
-            <div class="poster">
-                <div class="poster_inner">
-                    <img src="{{film.image_url}}" style="height: 400px; width: 100%;">
-                </div>
+    <div class="main">
+        <div class="menu">
+            <div class="top-menu-item">
+                <a href="/feed" style="text-decoration: none; color: black;">
+                    <p> Что посмотреть?</p>
+                </a>
             </div>
+            <div class="menu-item">
+                <p>Сообщения</p>
+            </div>
+            <div class="menu-item">
+                <a href="/friends" style="text-decoration: none; color: black;">
+                    <p>Друзья</p>
+                </a>
+            </div>
+            <div class="menu-item">
+                <a href="/search_films" style="text-decoration: none; color: black;">
+                    <p>Поиск</p>
+                </a>
+            </div>
+            <div class="menu-item">
+                <a href="/profile" style="text-decoration: none; color: black;">
+                    <p>Я</p>
+                </a>
+            </div>
+        </div>
+        <div class="box">
             <div class="film-info">
-                <div>
-                    <h1 class="title">{{film.title}}</h1>
-                </div>
-                <div class="film_info">
+                <div class="film-poster"><img src="{{film.image_url}}" style="height: 400px; width: 100%;"></div>
+                <div class="film-description">
+                    <div style="text-align: center; width: 100%;">
+                        <h1 class="title">{{film.title}}</h1>
+                    </div>
                     <div class="synopsis">{{film.synopsis}}</div>
-                    <div class="director">Director: {{film.director}}</div>
-                    <div class="cast">Cast: {{film.cast}}</div>
-                    <div class="duration">Duration: {{film.duration}}</div>
-                    <a href="{{film.url}}" target="_blank" style="text-decoration: none; color: black;"><p
-                            class="rating">IMDB rating: {{film.rating}}</p></a>
+                    <div class="director"><b>Director:</b> {{film.director}}</div>
+                    <div class="cast"><b>Cast:</b> {{film.cast}}</div>
+                    <div class="duration"><b>Duration:</b> {{film.duration}}</div>
+                    <a href="{{film.url}}" target="_blank" style="text-decoration: none; color: black;"></a>
+                    <p class="rating"><b>IMDB rating:</b> {{film.rating}}</p>
+                </div>
+            </div>
+            <div class="film-actions">
+                <div class="emoutions" style="text-align: center;">
+                    <br>
                     <form action="" method="POST">
-                        <input name="text">
-                        <input type="submit">
+                        <input type="submit" name="like" value="Нравится" style="background-color:black; background-image:url(/static/img/like.png); width:50px; height:50px; background-width:100%; border:none;  background-size: cover; font-size:0px; cursor:pointer;">&nbsp;&nbsp;&nbsp;
+                        <input type="submit" name="like" value="Не нравится" style="background-color:black; background-image:url(/static/img/dislike.png); width:50px; height:50px; background-width:100%; border:none;  background-size: cover; font-size:0px; cursor:pointer; margin-top:10px;">
                     </form>
+
+
+                </div>
+                <div class="notes ">
+                    <div class="np ">
+                        <form action="" method="POST">
+                            <div class="inp ">
+                                <input name="text" type="text" class="new-post-area" autocomplete="off">
+                            </div>
+                            <div class="sub ">
+                                <input type="submit" class="push-btn" name="submit_button" value="Отправить">
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+    </div>
 </body>
+
 </html>

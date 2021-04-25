@@ -1,33 +1,80 @@
-.posterWithPlotSummary {
-    width: 100%;
-    float: left;
-    height: 445px;
-}
-.poster {
-    float: left;
-    height: 445px;
-    width: 250px;
-}
-.poster_inner {
-    margin-left: 25px;
-    margin-top: 25px;
-    height: 400px;
-    width: 225px;
-}
-.title {
-    font-size: 2em;
-    text-align: center;
-}
 .film-info {
+    width: calc(100% - 200px);
+    height: 400px;
+    margin-top: 65px;
     float: left;
+}
+
+.film-poster {
+    width: 35%;
+    height: 500px;
+    float: left;
+}
+
+.film-description {
+    width: 62%;
+    height: 400px;
+    padding: 10px;
+    float: right;
+}
+
+.film-actions {
+    width: 800px;
+    height: 20px;
+    display: block;
     height: 300px;
-    margin-left: 50px;
-    width: 600px;
+    float: left;
 }
-.synopsis, .director, .cast, .duration, .rating {
-    text-align: right;
-    font-size: 20px;
+
+.box {
+    width: 1000px;
+    height: 800px;
 }
-.poster {
-    background-color: white;
+
+.emoutions {
+    width: 35%;
+    height: 100%;
+    background-color: black;
+    float: left;
+}
+
+.notes {
+    float: left;
+    width: 65%;
+    height: 100%;
+    float: left;
+}
+
+.new-post-area {
+    width: 300px;
+    height: 30px;
+    padding: 10px 15px;
+    border-width: 0;
+    background: #e6e6e6;
+    outline: none;
+    margin: 0;
+    float: left;
+}
+
+.inp {
+    margin-left: 80px;
+    width: 100%;
+    height: 50px;
+}
+
+.sub {
+    margin-left: 80px;
+    width: 100%;
+    height: 50px;
+}
+
+.push-btn {
+    width: 100px;
+    height: 50px;
+    content: отправить;
+    background-color: #1a1a1a;
+    border: none;
+    margin-left: 100px;
+    margin-top: 20px;
+    color: white;
 }
