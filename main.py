@@ -80,7 +80,7 @@ def profile():
     if request.method == 'POST':
         edit_photo(request.files['photo'], current_user)
     posts = db_sess.query(Post).filter(Post.creator_id == current_user.id)
-    return render_template('my_page.html', posts=posts)
+    return render_template('my_page.html', posts=posts, friends=get_friends(current_user))
 
 
 @app.route('/feed')
@@ -177,7 +177,6 @@ def load_user(user_id):
 
 
 def reload_current_user():
-    print('++++')
     user = load_user(current_user.id)
     login_user(user)
 

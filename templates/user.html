@@ -31,7 +31,7 @@
     <div class="user-info">
         <div class="photo">
             <div class="photo-card">
-                <img src="/download/db/user_images/avatar.jpg">
+                <img src="/download{{user.photo}}">
             </div>
             {% if not is_friend %}
             <form action="" method="POST">
@@ -79,7 +79,7 @@
         <div class="feed">
             <div class="post">
                 <div class="post-owner-info">
-                    <div class="post-mini-image"><img src="/download/db/user_images/avatar.jpg"
+                    <div class="post-mini-image"><img src="/download{{user.photo}}"
                                                       style="border-radius: 100px; border:2px solid #ceff1d"
                                                       width="80%" height="80%"></div>
                     <div class="post-owner">

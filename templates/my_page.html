@@ -71,14 +71,26 @@
         </div>
         <div class="bottom-info">
             <div class="friends">
-                блок друзей
+                <p style="text-align: center;">Ваши друзья</p>
+                {% for friend in friends %}
+                <div class="user-friends-mini-div">
+                    <div class="user-mini-image" style="padding-bottom: 4px;"><img
+                            src="/download{{friend.photo}}"
+                            style="border-radius: 100px; border:2px solid #ceff1d;"
+                            width=auto height=60px></div>
+                    <div class="user-mini-info">
+                        <a href="/user/{{friend.id}}" style="text-decoration:none; color:white;"><k>{{ friend.name }}</k></a>
+                    </div>
+                    <div>{{ message }}</div>
+                </div>
+                {% endfor %}
             </div>
             <div class="feed">
                 {% block content %}
                 {% for item in posts%}
                 <div class="post">
                     <div class="post-owner-info">
-                        <div class="post-mini-image"><img src="/download/db/user_images/avatar.jpg"
+                        <div class="post-mini-image"><img src="/download{{current_user.photo}}"
                                                           style="border-radius: 100px; border:2px solid #ceff1d"
                                                           width="80%" height="80%"></div>
                         <div class="post-owner">

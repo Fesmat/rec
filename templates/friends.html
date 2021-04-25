@@ -41,7 +41,7 @@
                 {% for friend in friends %}
                 <div class="user-friends-div">
                     <div class="post-mini-image" style="padding-bottom: 4px;"><img
-                            src="/download/db/user_images/avatar.jpg"
+                            src="/download{{friend.photo}}"
                             style="border-radius: 100px; border:2px solid #ceff1d;"
                             width=auto height=60px></div>
                     <div class="info-user">
@@ -61,7 +61,7 @@
                 {% for friend in may_be_friends %}
                 <div class="user-friends-div">
                     <div class="post-mini-image" style="padding-bottom: 4px;"><img
-                            src="/download/db/user_images/avatar.jpg"
+                            src="/download{{friend.photo}}"
                             style="border-radius: 100px; border:2px solid #ceff1d;"
                             width=auto height=60px></div>
                     <div class="info-user">
