@@ -36,7 +36,6 @@ def login():
     if form.validate_on_submit():
         user = db_sess.query(User).filter(User.login == form.login.data).first()
         if user and user.check_password(form.pwd.data):
-
             login_user(user, remember=form.remember_me.data)
             return redirect("/")
 
@@ -91,7 +90,15 @@ def profile():
 def feed():
     if not current_user.is_authenticated:
         return redirect('/login')
-    return render_template('feed.html')
+    print(current_user.friends)
+    posts = []
+    if current_user.friends:
+        print(list(map(int, current_user.friends.split(', '))))
+        posts = db_sess.query(Post).filter(Post.creator_id in list(map(int, current_user.friends.split(', '))))
+    posts2 = []
+    for post in posts:
+        posts2.append((post, download_film(post.film_id)))
+    return render_template('feed.html', posts=posts2)
 
 
 @app.route('/search_films', methods=['POST', 'GET'])
@@ -186,7 +193,11 @@ def render_user(user_id):
             delete_friend(current_user, int(user_id))
     reload_current_user()
     user = user_search.search_user(int(user_id))
-    return render_template('user.html', user=user, is_friend=is_friend(current_user, user))
+    posts = db_sess.query(Post).filter(Post.creator_id == user.id)
+    posts2 = []
+    for post in posts:
+        posts2.append((post, download_film(post.film_id)))
+    return render_template('user.html', user=user, posts=posts2, is_friend=is_friend(current_user, user))
 
 
 @app.errorhandler(404)
