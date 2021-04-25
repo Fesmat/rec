@@ -45,7 +45,7 @@
                             style="border-radius: 100px; border:2px solid #ceff1d;"
                             width=auto height=60px></div>
                     <div class="info-user">
-                        <label for="unfriend{{loop.index0}}">{{ friend.surname + ' ' + friend.name }}</label>
+                        <a href="/user/{{friend.id}}" style="text-decoration:none; color:white;"><k>{{ friend.surname + ' ' + friend.name }}</k></a>
                         <button name="unfriend{{loop.index0}}" type="submit" class="btn-primary"
                                 id="unfriend{{loop.index0}}" value="{{friend.id}}">Удалить друга</button>
                     </div>
@@ -65,7 +65,7 @@
                             style="border-radius: 100px; border:2px solid #ceff1d;"
                             width=auto height=60px></div>
                     <div class="info-user">
-                        <label for="make_friend{{loop.index0}}">{{ friend.surname + ' ' + friend.name }}</label>
+                        <a href="/user/{{friend.id}}" style="text-decoration:none; color:white;"><k>{{ friend.surname + ' ' + friend.name }}</k></a>
                         <button name="make_friend{{loop.index0}}" type="submit" class="btn-primary"
                                 id="make_friend{{loop.index0}}" value="{{friend.id}}">Добавить друга</button>
                     </div>

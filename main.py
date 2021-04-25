@@ -9,9 +9,9 @@ from forms.register_user import RegisterForm
 import logging
 from data.posts import Post
 from tools import search, user_search
-from handlers.friendly_file import make_friend, get_friends, get_maybe_friends, delete_friend
+from handlers.friendly_file import make_friend, get_friends, get_maybe_friends, delete_friend, is_friend
 from tools.edit_profile_photo import edit_photo
-
+import time
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '1Aj3sL12J09d43Ksp02A'
 login_manager = LoginManager()
@@ -111,6 +111,7 @@ def friends():
             make_friend(current_user, int(user_id))
         elif list(args.keys())[0].startswith('unfriend'):
             delete_friend(current_user, int(user_id))
+    reload_current_user()
     return render_template('friends.html', friends=get_friends(current_user),
                            may_be_friends=get_maybe_friends(current_user))
 
@@ -146,13 +147,23 @@ def get_film(film_id):
     return render_template('film.html', film=film)
 
 
-@app.route('/user/<user_id>')
+@app.route('/user/<user_id>', methods=['POST', 'GET'])
 def render_user(user_id):
     if not current_user.is_authenticated:
         return redirect('/login')
     if int(user_id) == current_user.id:
         return redirect('/profile')
-    return render_template('user.html', user=user_search.search_user(int(user_id)))
+    if request.method == 'POST':
+        form = request.form
+        args = dict(form)
+        user_id = args[list(args.keys())[0]]
+        if list(args.keys())[0].startswith('make_friend'):
+            make_friend(current_user, int(user_id))
+        elif list(args.keys())[0].startswith('unfriend'):
+            delete_friend(current_user, int(user_id))
+    reload_current_user()
+    user = user_search.search_user(int(user_id))
+    return render_template('user.html', user=user, is_friend=is_friend(current_user, user))
 
 
 @app.errorhandler(404)
@@ -163,6 +174,12 @@ def error_not_found(error):
 @login_manager.user_loader
 def load_user(user_id):
     return db_sess.query(User).get(user_id)
+
+
+def reload_current_user():
+    print('++++')
+    user = load_user(current_user.id)
+    login_user(user)
 
 
 if __name__ == '__main__':

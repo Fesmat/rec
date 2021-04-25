@@ -7,82 +7,95 @@
 </head>
 <body>
 <div class="header">
-    <p>CumImdb</p>
+    <k class="logo">CumImdb</k>
+    <a href="/logout" class="logout">Выйти</a>
 </div>
 <div class="menu">
-        <div class="top-menu-item">
-            <a href="/feed" style="text-decoration: none; color: black;"><p> Что посмотреть?</p></a>
-        </div>
-        <div class="menu-item">
-            <p>Сообщения</p>
-        </div>
-        <div class="menu-item">
-            <a href="/friends" style="text-decoration: none; color: black;"><p>Друзья</p></a>
-        </div>
-        <div class="menu-item">
-            <a href="/search_films" style="text-decoration: none; color: black;"><p>Поиск</p></a>
-        </div>
-        <div class="menu-item">
-            <a href="/profile" style="text-decoration: none; color: black;"><p>Я</p></a>
-        </div>
+    <div class="top-menu-item">
+        <a href="/feed" style="text-decoration: none; color: black;"><p> Что посмотреть?</p></a>
     </div>
-    <div class="info">
-        <div class="user-info">
-            <div class="photo">
-                <div class="photo-card">
-                    <img src="/download/db/user_images/avatar.jpg">
-                </div>
-                <div class="edit_photo">
-                    <button class="btn_add_friend">Добавить в друзья</button>
-                </div>
+    <div class="menu-item">
+        <p>Сообщения</p>
+    </div>
+    <div class="menu-item">
+        <a href="/friends" style="text-decoration: none; color: black;"><p>Друзья</p></a>
+    </div>
+    <div class="menu-item">
+        <a href="/search_films" style="text-decoration: none; color: black;"><p>Поиск</p></a>
+    </div>
+    <div class="menu-item">
+        <a href="/profile" style="text-decoration: none; color: black;"><p>Я</p></a>
+    </div>
+</div>
+<div class="info">
+    <div class="user-info">
+        <div class="photo">
+            <div class="photo-card">
+                <img src="/download/db/user_images/avatar.jpg">
             </div>
-            <div class="inf">
-                <div class="gen-info">
-                    <H1 style="text-align:center; font-family:Tahoma">{{user.name}}
-                        {{user.surname}}</H1>
-                    <h4 style="text-align:center; font-family:Tahoma">{{user.age}} лет</h4>
-                    <p style="text-align:center; font-family:Tahoma">{{user.description}}</p>
-                </div>
-                <div class="film-info">
-                    <table class="film-info-table" cellpadding="10">
-                        <tr>
-                            <td>
-                                <k style="font-size: 30px; font-weight:500; ">{{user.number_own_posts}}</k>
-                                <p>рецензий</p>
-                            </td>
-                            <td>
-                                <k style="font-size: 30px; font-weight:500; ">{{user.number_liked_posts}}</k>
-                                <p>понравилось</p>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
+            {% if not is_friend %}
+            <form action="" method="POST">
+                <button name="make_friend" type="submit" class="btn-primary btn_edit"
+                        style="margin-left: 45px; margin-top: 40px;"
+                        id="make_friend" value="{{user.id}}">Добавить друга
+                </button>
+            </form>
+            {% else %}
+            <form action="" method="POST">
+                <button name="unfriend" type="submit"
+                        class="btn-primary btn_edit" style="margin-left: 45px; margin-top: 40px;"
+                        id="unfriend" value="{{user.id}}">Удалить друга
+                </button>
+            </form>
+            {% endif %}
         </div>
-        <div class="bottom-info">
-            <div class="friends">
-                блок друзей
+        <div class="inf">
+            <div class="gen-info">
+                <H1 style="text-align:center; font-family:Tahoma">{{user.name}}
+                    {{user.surname}}</H1>
+                <h4 style="text-align:center; font-family:Tahoma">{{user.age}} лет</h4>
+                <p style="text-align:center; font-family:Tahoma">{{user.description}}</p>
             </div>
-            <div class="feed">
-                <div class="post">
-                    <div class="post-owner-info">
-                        <div class="post-mini-image"><img src="/download/db/user_images/avatar.jpg"
-                                                          style="border-radius: 100px; border:2px solid #ceff1d"
-                                                          width="80%" height="80%"></div>
-                        <div class="post-owner">
-                            <k>Павел Шилин</k>
-                            <br>
-                            <k>19:17</k>
-                        </div>
-                        <div class="post-menu"></div>
-                    </div>
-                    <div class="post-content">
-                        <div class="poster"></div>
-                        <div class="note"></div>
-                    </div>
-                </div>
+            <div class="film-info">
+                <table class="film-info-table" cellpadding="10">
+                    <tr>
+                        <td>
+                            <k style="font-size: 30px; font-weight:500; ">{{user.number_own_posts}}</k>
+                            <p>рецензий</p>
+                        </td>
+                        <td>
+                            <k style="font-size: 30px; font-weight:500; ">{{user.number_liked_posts}}</k>
+                            <p>понравилось</p>
+                        </td>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>
+    <div class="bottom-info">
+        <div class="friends">
+            блок друзей
+        </div>
+        <div class="feed">
+            <div class="post">
+                <div class="post-owner-info">
+                    <div class="post-mini-image"><img src="/download/db/user_images/avatar.jpg"
+                                                      style="border-radius: 100px; border:2px solid #ceff1d"
+                                                      width="80%" height="80%"></div>
+                    <div class="post-owner">
+                        <k>Павел Шилин</k>
+                        <br>
+                        <k>19:17</k>
+                    </div>
+                    <div class="post-menu"></div>
+                </div>
+                <div class="post-content">
+                    <div class="poster"></div>
+                    <div class="note"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

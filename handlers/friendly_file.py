@@ -11,12 +11,15 @@ def make_friend(current_user, friend_id):
         return
     friends = current_user.friends
     if friends:
+        if friend_id in list(map(int, friends.split(', '))):
+            return
         friends += f', {friend_id}'
     else:
         friends = str(friend_id)
     user.friends = friends
     db_sess.commit()
-    db_sess.close()
+
+    print(is_friend(user, user_to_fr))
     return
 
 
@@ -59,6 +62,18 @@ def delete_friend(current_user, friend_id):
         if friend_id in friends:
             del friends[friends.index(friend_id)]
         user.friends = ', '.join(friends)
+        if not user.friends:
+            user.friends = None
         db_sess.commit()
-        db_sess.close()
+
+        print(is_friend(current_user, user))
     return
+
+
+def is_friend(user1, user2):
+    db_sess = db_session.create_session()
+    user_one = db_sess.query(User).filter(User.id == user1.id).first()
+    user_two = db_sess.query(User).filter(User.id == user2.id).first()
+    if user_one.friends and user_two.id in list(map(int, user_one.friends.split(', '))):
+        return True
+    return False
