@@ -138,12 +138,28 @@ def load_film(film, n):
     abort(404)
 
 
-@app.route('/film/<film_id>')
-@app.route('/film/<film_id>/')
+@app.route('/film/<film_id>', methods=['POST', 'GET'])
+@app.route('/film/<film_id>/', methods=['POST', 'GET'])
 def get_film(film_id):
     if not current_user.is_authenticated:
         return redirect('/login')
     film = search.get_info(film_id)
+    if request.method == 'POST':
+        if 'like' in dict(request.form).keys():
+            if request.form['like'] == 'Нравится':
+                print(1)
+            elif request.form['like'] == 'Не нравится':
+                print(2)
+        elif 'submit_button' in dict(request.form).keys():
+            text = request.form['text']
+            post = Post()
+            post.creator_id = current_user.id
+            post.text = text
+            db_sess.add(post)
+            db_sess.commit()
+            current_user.number_own_posts += 1
+            print(text)
+            db_sess.close()
     return render_template('film.html', film=film)
 
 
