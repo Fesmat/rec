@@ -17,7 +17,7 @@ class User(SqlAlchemyBase, UserMixin, SerializerMixin):
     surname = sqlalchemy.Column(sqlalchemy.String, nullable=False)
     age = sqlalchemy.Column(sqlalchemy.Integer, nullable=False)
     description = sqlalchemy.Column(sqlalchemy.Text, nullable=False)
-    photo = sqlalchemy.Column(sqlalchemy.String, nullable=True)
+    photo = sqlalchemy.Column(sqlalchemy.String, nullable=True, default='/db/user_images/default.jpg')
     number_liked_posts = sqlalchemy.Column(sqlalchemy.Integer, nullable=False, default=0)
     number_own_posts = sqlalchemy.Column(sqlalchemy.Integer, nullable=False, default=0)
     friends = sqlalchemy.Column(sqlalchemy.String, nullable=True)

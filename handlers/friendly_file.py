@@ -5,7 +5,6 @@ from data.users import User
 
 def make_friend(current_user, friend_id):
     db_sess = db_session.create_session()
-    print('++++')
     user = db_sess.query(User).filter(User.id == current_user.id).first()
     user_to_fr = db_sess.query(User).filter(User.id == friend_id).first()
     if not current_user or not user_to_fr:
@@ -16,7 +15,6 @@ def make_friend(current_user, friend_id):
     else:
         friends = str(friend_id)
     user.friends = friends
-    print(user.friends)
     db_sess.commit()
     db_sess.close()
     return

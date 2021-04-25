@@ -37,10 +37,13 @@
         <div class="user-info">
             <div class="photo">
                 <div class="photo-card">
-                    <img src="/download/db/user_images/avatar.jpg">
+                    <img src="/download{{current_user.photo}}">
                 </div>
                 <div class="edit_photo">
-                    <button class="btn_edit">Редактировать</button>
+                    <form method="post" enctype="multipart/form-data">
+                        <input type="file" name="photo" id="upload_file" value="Выбрать фото" class="btn_edit" style="width: 320px; margin-bottom: 10px; margin-left: 10px; padding-right: 1px;">
+                        <button class="btn_edit">Редактировать</button>
+                    </form>
                 </div>
             </div>
             <div class="inf">

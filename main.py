@@ -10,6 +10,7 @@ import logging
 from data.posts import Post
 from tools import search, user_search
 from handlers.friendly_file import make_friend, get_friends, get_maybe_friends, delete_friend
+from tools.edit_profile_photo import edit_photo
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '1Aj3sL12J09d43Ksp02A'
@@ -32,7 +33,6 @@ def login():
         return redirect('/')
     form = LoginForm()
     if form.validate_on_submit():
-        db_sess = db_session.create_session()
         user = db_sess.query(User).filter(User.login == form.login.data).first()
         if user and user.check_password(form.pwd.data):
             db_sess.close()
@@ -51,7 +51,6 @@ def register_user():
         return redirect('/')
     form = RegisterForm()
     if form.validate_on_submit():
-        db_sess = db_session.create_session()
         user = User()
         us = db_sess.query(User).filter(User.login == form.login.data).all()
         if us:
@@ -74,13 +73,13 @@ def register_user():
     return render_template('register.html', title='Registration', form=form)
 
 
-@app.route('/profile')
+@app.route('/profile', methods=['POST', 'GET'])
 def profile():
     if not current_user.is_authenticated:
         return redirect('/login')
+    if request.method == 'POST':
+        edit_photo(request.files['photo'], current_user)
     posts = db_sess.query(Post).filter(Post.creator_id == current_user.id)
-    for i in posts:
-        print(i.text)
     return render_template('my_page.html', posts=posts)
 
 
@@ -163,7 +162,6 @@ def error_not_found(error):
 
 @login_manager.user_loader
 def load_user(user_id):
-    db_sess = db_session.create_session()
     return db_sess.query(User).get(user_id)
 
 
