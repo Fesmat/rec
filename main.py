@@ -75,10 +75,12 @@ def register_user():
 
 @app.route('/profile')
 def profile():
+    months = ['янв.', 'фев.', 'мар.', 'апр.', 'мая', 'июня', 'июля', 'авг.', 'сент.',
+              'окт.', 'ноября', 'дек.']
     if not current_user.is_authenticated:
         return redirect('/login')
     posts = db_sess.query(Post).filter(Post.creator_id == current_user.id)
-    return render_template('my_page.html', posts=posts)
+    return render_template('my_page.html', posts=posts, months=months)
 
 
 @app.route('/feed')
@@ -133,6 +135,7 @@ def get_film(film_id):
     if not current_user.is_authenticated:
         return redirect('/login')
     film = search.get_info(film_id)
+
     if request.method == 'POST':
         if 'like' in dict(request.form).keys():
             if request.form['like'] == 'Нравится':
@@ -175,9 +178,4 @@ def load_user(user_id):
 if __name__ == '__main__':
     db_session.global_init("db/global.db")
     db_sess = db_session.create_session()
-    '''post = Post()
-    post.creator_id = "1"
-    post.text = "Привет текст второй"
-    db_sess.add(post)
-    db_sess.commit()'''
     app.run(port=5000, host='127.0.0.1')

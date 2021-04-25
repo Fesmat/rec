@@ -79,9 +79,9 @@
                                                           style="border-radius: 100px; border:2px solid #ceff1d"
                                                           width="80%" height="80%"></div>
                         <div class="post-owner">
-                            <k>{{current_user.name}}</k>
+                            <k>{{current_user.name}} {{current_user.surname}}</k>
                             <br>
-                            <k>{{item.creation_date.strftime('%H:%M')}}</k>
+                            <k>{{item.creation_date.day}}  {{months[item.creation_date.month - 1]}}  {{item.creation_date.strftime('%H:%M')}}</k>
                         </div>
                         <div class="post-menu"></div>
                     </div>
