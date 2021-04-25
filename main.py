@@ -168,9 +168,4 @@ def load_user(user_id):
 if __name__ == '__main__':
     db_session.global_init("db/global.db")
     db_sess = db_session.create_session()
-    '''post = Post()
-    post.creator_id = "1"
-    post.text = "Привет текст второй"
-    db_sess.add(post)
-    db_sess.commit()'''
     app.run(port=5000, host='127.0.0.1')

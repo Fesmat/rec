@@ -88,3 +88,6 @@ button:before {
     margin-bottom: 40%;
     top: 20px;
 }
+.film_href {
+    text-decoration: none;
+}
