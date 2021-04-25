@@ -11,7 +11,8 @@ from data.posts import Post
 from tools import search, user_search
 from handlers.friendly_file import make_friend, get_friends, get_maybe_friends, delete_friend, is_friend
 from tools.edit_profile_photo import edit_photo
-import time
+from tools.search import get_info
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '1Aj3sL12J09d43Ksp02A'
 login_manager = LoginManager()
@@ -35,10 +36,10 @@ def login():
     if form.validate_on_submit():
         user = db_sess.query(User).filter(User.login == form.login.data).first()
         if user and user.check_password(form.pwd.data):
-            db_sess.close()
+
             login_user(user, remember=form.remember_me.data)
             return redirect("/")
-        db_sess.close()
+
         return render_template('login.html',
                                message="Неверный логин или пароль",
                                form=form)
@@ -80,7 +81,10 @@ def profile():
     if request.method == 'POST':
         edit_photo(request.files['photo'], current_user)
     posts = db_sess.query(Post).filter(Post.creator_id == current_user.id)
-    return render_template('my_page.html', posts=posts, friends=get_friends(current_user))
+    posts2 = []
+    for post in posts:
+        posts2.append((post, download_film(post.film_id)))
+    return render_template('my_page.html', posts=posts2, friends=get_friends(current_user))
 
 
 @app.route('/feed')
@@ -128,6 +132,10 @@ def download_image(path_to_file):
     return send_file(path_to_file)
 
 
+def download_film(film_id):
+    return get_info(film_id)
+
+
 @app.route('/load_films/<film>/<n>')
 def load_film(film, n):
     film = ' '.join(film.split('_'))
@@ -155,11 +163,10 @@ def get_film(film_id):
             post = Post()
             post.creator_id = current_user.id
             post.text = text
+            post.film_id = film_id
             db_sess.add(post)
             db_sess.commit()
             current_user.number_own_posts += 1
-            print(text)
-            db_sess.close()
     return render_template('film.html', film=film)
 
 
