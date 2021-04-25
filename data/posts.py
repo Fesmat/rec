@@ -16,4 +16,5 @@ class Post(SqlAlchemyBase, SerializerMixin):
     text = sqlalchemy.Column(sqlalchemy.String, nullable=False)
 
     creation_date = sqlalchemy.Column(sqlalchemy.DateTime, nullable=True, default=datetime.datetime.now)
+    film_id = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     user = orm.relation('User')

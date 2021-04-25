@@ -99,8 +99,11 @@ $.getJSON('/load_films/' + document.getElementById("search").value.split(' ').jo
         var p_cl = null;
         var im_cl = null;
         $.map(data, function(item) {
-        elem = block_films.appendChild(document.createElement('div'));
+        a_cl = block_films.appendChild(document.createElement('a'));
+        elem = a_cl.appendChild(document.createElement('div'));
         elem.setAttribute('class', 'film_short_info');
+        a_cl.setAttribute('class', 'film_href');
+        a_cl.setAttribute('href', '/film' + item.id)
         im_cl = elem.appendChild(document.createElement('img'));
         im_cl.setAttribute('src', item.image_url);
         im_cl.setAttribute('class', 'film_image');

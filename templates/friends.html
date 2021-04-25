@@ -36,23 +36,43 @@
     <div class="form-body">
         <div class="user-friends">
             <p style="color: black; font-family: Tahoma; text-align: center;">Ваши друзья</p>
-            <div class="user-friends-div">
-
-                <form action="" method="post" style="margin-left: 5px; margin-top: 5px; width:auto; height: auto; top: 2px;">
-                    {{ form.hidden_tag() }}
-
+            <form action="" method="POST"
+                  style="margin-left: 5px; margin-top: 5px; width:auto; height: auto; top: 2px;">
+                {% for friend in friends %}
+                <div class="user-friends-div">
                     <div class="post-mini-image" style="padding-bottom: 4px;"><img
-                            src="/download/db/user_images/avatar.jpg"
+                            src="/download{{friend.photo}}"
                             style="border-radius: 100px; border:2px solid #ceff1d;"
                             width=auto height=60px></div>
                     <div class="info-user">
-                        {{ form.username.label}}
-                        {{ form.unfriend(type="submit", class="btn btn-primary go-btn") }}
+                        <a href="/user/{{friend.id}}" style="text-decoration:none; color:white;"><k>{{ friend.surname + ' ' + friend.name }}</k></a>
+                        <button name="unfriend{{loop.index0}}" type="submit" class="btn-primary"
+                                id="unfriend{{loop.index0}}" value="{{friend.id}}">Удалить друга</button>
                     </div>
-
                     <div>{{ message }}</div>
-                </form>
-            </div>
+                </div>
+                {% endfor %}
+            </form>
+        </div>
+        <div class="make-friends">
+            <p style="color: black; font-family: Tahoma; text-align: center;">Добавить друзей</p>
+            <form action="" method="POST"
+                  style="margin-left: 5px; margin-top: 5px; width:auto; height: auto; top: 2px;">
+                {% for friend in may_be_friends %}
+                <div class="user-friends-div">
+                    <div class="post-mini-image" style="padding-bottom: 4px;"><img
+                            src="/download{{friend.photo}}"
+                            style="border-radius: 100px; border:2px solid #ceff1d;"
+                            width=auto height=60px></div>
+                    <div class="info-user">
+                        <a href="/user/{{friend.id}}" style="text-decoration:none; color:white;"><k>{{ friend.surname + ' ' + friend.name }}</k></a>
+                        <button name="make_friend{{loop.index0}}" type="submit" class="btn-primary"
+                                id="make_friend{{loop.index0}}" value="{{friend.id}}">Добавить друга</button>
+                    </div>
+                    <div>{{ message }}</div>
+                </div>
+                {% endfor %}
+            </form>
         </div>
     </div>
 </div>
