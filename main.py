@@ -172,7 +172,10 @@ def get_film(film_id):
             post.film_id = film_id
             db_sess.add(post)
             db_sess.commit()
+            user = db_sess.query(User).filter(User.id == current_user.id).first()
+            user.number_own_posts += 1
             current_user.number_own_posts += 1
+            db_sess.commit()
     return render_template('film.html', film=film)
 
 
