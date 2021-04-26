@@ -90,14 +90,13 @@ def profile():
 def feed():
     if not current_user.is_authenticated:
         return redirect('/login')
-    print(current_user.friends)
     posts = []
     if current_user.friends:
-        print(list(map(int, current_user.friends.split(', '))))
-        posts = db_sess.query(Post).filter(Post.creator_id in list(map(int, current_user.friends.split(', '))))
+        posts = db_sess.query(Post).filter(Post.creator_id.in_(list(map(int, current_user.friends.split(', ')))))
     posts2 = []
     for post in posts:
-        posts2.append((post, download_film(post.film_id)))
+        user = db_sess.query(User).filter(User.id == post.creator_id).first()
+        posts2.append((post, download_film(post.film_id), user))
     return render_template('feed.html', posts=posts2)
 
 
