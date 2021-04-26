@@ -83,7 +83,7 @@ def profile():
     posts2 = []
     for post in posts:
         posts2.append((post, download_film(post.film_id)))
-    return render_template('my_page.html', posts=posts2, friends=get_friends(current_user))
+    return render_template('my_page.html', posts=posts2[::-1], friends=get_friends(current_user))
 
 
 @app.route('/feed')
@@ -97,7 +97,7 @@ def feed():
     for post in posts:
         user = db_sess.query(User).filter(User.id == post.creator_id).first()
         posts2.append((post, download_film(post.film_id), user))
-    return render_template('feed.html', posts=posts2)
+    return render_template('feed.html', posts=posts2[::-1])
 
 
 @app.route('/search_films', methods=['POST', 'GET'])
@@ -199,7 +199,7 @@ def render_user(user_id):
     posts2 = []
     for post in posts:
         posts2.append((post, download_film(post.film_id)))
-    return render_template('user.html', user=user, posts=posts2, is_friend=is_friend(current_user, user))
+    return render_template('user.html', user=user, posts=posts2[::-1], is_friend=is_friend(current_user, user))
 
 
 @app.errorhandler(404)
